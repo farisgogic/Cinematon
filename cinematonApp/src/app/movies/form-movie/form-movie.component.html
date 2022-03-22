@@ -1,0 +1,48 @@
+<form (submit)="SaveChanges()" [formGroup]="form">
+<mat-form-field appearance="outline">
+  <mat-label>Naziv</mat-label>
+  <input formControlName="Naslov" matInput />
+  <mat-error>Obavezno polje!</mat-error>
+</mat-form-field>
+
+  <div class="checkbox-container">
+    <mat-checkbox formControlName="naProgramu">Na programu</mat-checkbox>
+  </div>
+
+  <div class="checkbox-container">
+    <mat-checkbox formControlName="uskoro">Uskoro</mat-checkbox>
+  </div>
+
+  <mat-form-field appearance="outline">
+  <mat-label>Trailer</mat-label>
+  <input formControlName="Trailer" matInput />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Datum prikazivanja</mat-label>
+    <input formControlName="Datum" matInput />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <h3>Izaberite sliku</h3>
+  <app-input-img [urlCurrentImage]="model?.Poster">
+    (onImageSelected)="onImageSelected($event)">
+  </app-input-img>
+
+
+  <app-input-markdown
+  [markdownContent]="model?.Opis"
+  (changeMarkdown)="changeMarkdown($event)"
+  ></app-input-markdown>
+
+  <h4>Odaberite zanrove</h4>
+
+  <app-visestruki-odabir [NonSelectedItems]="NonSelectedZanr" [SelectedItems]="SelectedZanr"></app-visestruki-odabir>
+
+  <button mat-flat-button color="primary" [disabled]="form.invalid">
+    Sacuvaj
+  </button>
+  <a mat-stroked-button routerLink="/">Otkazi</a>
+
+</form>

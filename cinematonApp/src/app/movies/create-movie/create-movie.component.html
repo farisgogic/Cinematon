@@ -1,0 +1,9 @@
+<h2>Dodaj film</h2>
+
+<app-form-movie
+  *ngIf="NonSelectedZanr"
+  [NonSelectedZanr]="NonSelectedZanr"
+  (onSaveChanges)="saveChanges($event)"
+></app-form-movie>
+
+<mat-spinner *ngIf="!NonSelectedZanr"></mat-spinner>

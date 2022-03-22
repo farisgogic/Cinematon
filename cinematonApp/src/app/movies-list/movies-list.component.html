@@ -1,0 +1,23 @@
+<app-generic-list [list]="movies">
+  <ng-container content>
+    <div class="movies-container">
+      <div *ngFor="let movie of movies; let index = index" class="movie-container">
+        <a>
+          <img [src]="movie.poster" alt="Poster" />
+        </a>
+        <p>
+          <a>{{movie.Naslov}}</a>
+        </p>
+        <div>
+          <a mat-flat-button color="primary" type="button">
+            Edit
+          </a>
+          <a mat-flat-button color="warn" type="button">
+            Obrisi
+          </a>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</app-generic-list>
+

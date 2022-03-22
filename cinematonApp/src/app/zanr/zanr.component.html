@@ -1,0 +1,39 @@
+<h2>Zanrovi</h2>
+
+<button mat-flat-button color="primary" routerLink="/zanr/napraviNovi">Napravi novi</button>
+
+<app-generic-list [list]="zanr">
+  <ng-container content>
+    <table mat-table [dataSource]="zanr" class="mat-elevation-z8 table-index">
+      <ng-container matColumnDef="Naziv">
+        <th mat-header-cell *matHeaderCellDef>Naziv</th>
+        <td mat-cell *matCellDef="let element">{{element.naziv}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Opcije">
+        <th mat-header-cell *matHeaderCellDef>Opcije</th>
+        <td mat-cell *matCellDef="let element">
+          <a
+            routerLink="/zanr/edit/{{element.id}}"
+            mat-flat-button color="primary"
+          >
+            Uredi
+          </a>
+          <button mat-flat-button color="warn"
+            [swal]="{
+              title:'Potvrda',
+              text:'Jeste li sigurni da zelite izbrisati?',
+              showCancelButton: true
+            }"
+            (confirm)="delete(element.id)">
+            Obrisi
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="kolone"></tr>
+      <tr mat-row *matRowDef="let row; columns: kolone"></tr>
+    </table>
+  </ng-container>
+</app-generic-list>
+

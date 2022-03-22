@@ -1,0 +1,13 @@
+mat-toolbar{
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1000;
+}
+.mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button :hover{
+  color: white;
+  font-size: 18px;
+}
+.mat-icon{
+  font-size: 25px;
+}
