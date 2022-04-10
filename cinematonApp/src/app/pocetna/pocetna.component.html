@@ -1,5 +1,5 @@
 <h2>Na programu</h2>
-<app-movies-list [movies]="FilmoviNaProgramu"></app-movies-list>
+<app-movies-list (onDelete)="onDelete()" [movies]="FilmoviNaProgramu"></app-movies-list>
 
 <h2>Uskoro</h2>
-<app-movies-list [movies]="FilmoviUskoro"></app-movies-list>
+<app-movies-list (onDelete)="onDelete()" [movies]="FilmoviUskoro"></app-movies-list>

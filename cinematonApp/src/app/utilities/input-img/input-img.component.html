@@ -1,6 +1,6 @@
 <div>
   <button type="button" mat-raised-button (click)="fileInput.click()">Izaberi sliku</button>
-  <input type="file" hidden #fileInput accept="image/png, image/jpeg" (change)="change($event)"/>
+  <input type="file" hidden #fileInput accept="image/png, image/jpeg, image/jpg" (change)="change($event)"/>
 
   <div>
     <div *ngIf="imageBase64">

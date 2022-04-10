@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http'
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2'
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,7 +22,6 @@ import { EditMovieComponent } from './movies/edit-movie/edit-movie.component';
 import { EditZanrComponent } from './zanr/edit-zanr/edit-zanr.component';
 import { FormZanrComponent } from './zanr/form-zanr/form-zanr.component';
 import { MovieFilterComponent } from './movies/movie-filter/movie-filter.component';
-import { KontaktComponent } from './kontakt/kontakt.component';
 import { FormMovieComponent } from './movies/form-movie/form-movie.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import { InputImgComponent } from './utilities/input-img/input-img.component';
@@ -33,6 +32,15 @@ import {MatNativeDateModule} from "@angular/material/core";
 import { VisestrukiOdabirComponent } from './utilities/visestruki-odabir/visestruki-odabir.component';
 import { DisplayErrorsComponent } from './utilities/display-errors/display-errors.component';
 import {MatTableModule} from "@angular/material/table";
+import { MovieDetaljiComponent } from './movies/movie-detalji/movie-detalji.component';
+import { AuthorizeViewComponent } from './security/authorize-view/authorize-view.component';
+import { LoginComponent } from './security/login/login.component';
+import { RegistracijaComponent } from './security/registracija/registracija.component';
+import { AuthenticationFormComponent } from './security/authentication-form/authentication-form.component';
+import {JwtInterceptorService} from "./security/jwt-interceptor.service";
+import { KorisnikIndexComponent } from './security/korisnik-index/korisnik-index.component';
+import {InputPriceFormatModule} from 'angular-input-price-format';
+import { RezervacijaComponent } from './rezervacija/rezervacija.component';
 
 @NgModule({
   declarations: [
@@ -49,12 +57,18 @@ import {MatTableModule} from "@angular/material/table";
     EditZanrComponent,
     FormZanrComponent,
     MovieFilterComponent,
-    KontaktComponent,
     FormMovieComponent,
     InputImgComponent,
     InputMarkdownComponent,
     VisestrukiOdabirComponent,
-    DisplayErrorsComponent
+    DisplayErrorsComponent,
+    MovieDetaljiComponent,
+    AuthorizeViewComponent,
+    LoginComponent,
+    RegistracijaComponent,
+    AuthenticationFormComponent,
+    KorisnikIndexComponent,
+    RezervacijaComponent
   ],
     imports: [
         BrowserModule,
@@ -69,9 +83,14 @@ import {MatTableModule} from "@angular/material/table";
         HttpClientModule,
         MatNativeDateModule,
         MatTableModule,
-      SweetAlert2Module.forRoot()
+      SweetAlert2Module.forRoot(),
+        InputPriceFormatModule
     ],
-  providers: [],
+  providers: [{
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptorService,
+      multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,7 +5,7 @@ export function toBase64(file:File){
     const  reader =new FileReader();
     reader.readAsDataURL(file);
     reader.onload=()=>resolve(reader.result);
-    reader.onerror=(error)=>reject(error);
+    reader.onerror = (error:ProgressEvent<FileReader>) => reject(error);
   })
 }
 
@@ -15,7 +15,9 @@ export function parseWebAPIErrors(response:any):string[]{
   if(response.error){
     if(typeof response.error==='string'){
       result.push(response.error);
-    }else{
+    }else if(Array.isArray(response.error)){
+      response.error.forEach((value:any)=>result.push(value.description));
+    } else{
       const mapErrors=response.error.errors;
       const entries=Object.entries(mapErrors);
       entries.forEach((arr:any[])=>{

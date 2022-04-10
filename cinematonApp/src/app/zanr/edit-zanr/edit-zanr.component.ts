@@ -18,15 +18,17 @@ export class EditZanrComponent implements OnInit {
   model!: zanrDTO;
 
   ngOnInit(): void {
-    this.activatedRouted.params.subscribe((params:any) => {
-      this.zanrService.GetById(params.id).subscribe((zanr:any)=>{
+    this.activatedRouted.params.subscribe(params => {
+      this.zanrService.GetById(params['id']).subscribe((zanr:any)=>{
         this.model=zanr;
       })
     });
+
+
   }
 
   SaveChanges(zanr: ZanrCreationDTO){
-    this.zanrService.edit(zanr, this.model.Id).subscribe(()=>{
+    this.zanrService.edit(zanr, this.model.id).subscribe(()=>{
       this.router.navigate(["/zanr"]);
     });
   }

@@ -3,6 +3,6 @@ export interface ZanrCreationDTO{
 }
 
 export interface zanrDTO{
-  Id: number;
-  Naziv: string;
+  id: number;
+  naziv: string;
 }

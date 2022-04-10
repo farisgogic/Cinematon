@@ -4,6 +4,7 @@ import {VisestrukiOdabirModel} from "../../utilities/visestruki-odabir/visestruk
 import {zanrDTO} from "../../zanr/zanr.model";
 import {MoviesService} from "../movies.service";
 import {map} from 'rxjs/operators';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-movie',
@@ -11,21 +12,23 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./create-movie.component.css']
 })
 export class CreateMovieComponent implements OnInit {
-  NonSelectedZanr: VisestrukiOdabirModel[] = [];
+  NonSelectedZanr: VisestrukiOdabirModel[]=[];
 
-  constructor(private moviesService:MoviesService) { }
+  constructor(private moviesService:MoviesService, private router:Router) { }
 
 
   ngOnInit(): void {
     this.moviesService.postGet().subscribe((response:FilmoviPostGetDTO) => {
-      this.NonSelectedZanr = response.Zanr.map((zanr: zanrDTO) => {
-        return <VisestrukiOdabirModel>({key:zanr.Id, value: zanr.Naziv});
+      this.NonSelectedZanr = response.zanr.map((zanrDTO: zanrDTO) => {
+        return <VisestrukiOdabirModel>({key:zanrDTO.id, value: zanrDTO.naziv});
       });
     });
   }
 
   saveChanges(movieCreationDTO:movieCreationDTO){
-    console.log(movieCreationDTO);
+    this.moviesService.create(movieCreationDTO).subscribe(id => {
+      this.router.navigate(['/movies/'+ id]);
+    });
   }
 
 }

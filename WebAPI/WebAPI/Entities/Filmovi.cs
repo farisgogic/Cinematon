@@ -12,10 +12,14 @@ namespace WebAPI.Entities
         [StringLength(maximumLength:100)]
         [Required]
         public string Naslov { get; set; }
+        public Boolean naProgramu { get; set; }
+        public Boolean uskoro { get; set; }
         public string Opis { get; set; }
         public string Trailer { get; set; }
         public DateTime Datum { get; set; }
         public string Poster { get; set; }
         public List<FilmoviZanr> FilmoviZanr{ get; set; }
+        public int Cijena { get; set; }
+
     }
 }

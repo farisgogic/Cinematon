@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {movieCreationDTO, movieDTO} from "../movies.model";
+import {ActivatedRoute, Router} from "@angular/router";
+import {FilmoviPutGetDTO, movieCreationDTO, movieDTO} from "../movies.model";
+import {MoviesService} from "../movies.service";
+import {VisestrukiOdabirModel} from "../../utilities/visestruki-odabir/visestruki-odabir-model";
 
 @Component({
   selector: 'app-edit-movie',
@@ -9,18 +11,32 @@ import {movieCreationDTO, movieDTO} from "../movies.model";
 })
 export class EditMovieComponent implements OnInit {
 
-  constructor(private activatedRouted: ActivatedRoute) { }
+  constructor(private activatedRouted: ActivatedRoute, private moviesService:MoviesService,
+              private router:Router) { }
 
-  model:movieDTO={Naslov:'Spider-Man', naProgramu:true, uskoro:false, Opis:"....", Datum:new Date(),
-    Trailer:'.......', Poster:'https://m.media-amazon.com/images/M/MV5BMjMyOTM4MDMxNV5BMl5BanBnXkFtZTcwNjIyNzExOA@@._V1_FMjpg_UY720_.jpg'
-  }
+  model!:movieDTO;
+  selectedZanr!: VisestrukiOdabirModel[];
+  nonSelectedZanr!: VisestrukiOdabirModel[];
+
   ngOnInit(): void {
     this.activatedRouted.params.subscribe(params => {
+      this.moviesService.putGet(params['id']).subscribe((putGetDTO:FilmoviPutGetDTO) => {
+        this.model = putGetDTO.filmovi;
 
+        this.selectedZanr = putGetDTO.selectedZanr.map(zanrDTO => {
+          return <VisestrukiOdabirModel>({key:zanrDTO.id, value: zanrDTO.naziv});
+        });
+
+        this.nonSelectedZanr = putGetDTO.nonSelectedZanr.map(zanrDTO => {
+          return <VisestrukiOdabirModel>({key:zanrDTO.id, value: zanrDTO.naziv});
+        });
+      });
     });
   }
 
   SaveChanges(movieCreationDTO: movieCreationDTO){
-
+    this.moviesService.edit(this.model.id, movieCreationDTO).subscribe(()=>{
+      this.router.navigate(['/movies/'+this.model.id]);
+    });
   }
 }

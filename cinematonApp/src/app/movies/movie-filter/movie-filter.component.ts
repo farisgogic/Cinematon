@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
+import { zanrDTO } from 'src/app/zanr/zanr.model';
+import {MoviesService} from "../movies.service";
+import {movieDTO} from "../movies.model";
+import {ZanrService} from "../../zanr/zanr.service";
+import {HttpResponse} from "@angular/common/http";
+import {Location} from "@angular/common"
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-movie-filter',
@@ -8,19 +15,16 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 })
 export class MovieFilterComponent implements OnInit {
 
-  constructor(private formBuilder:FormBuilder) { }
+  constructor(private formBuilder:FormBuilder, private moviesService:MoviesService, private zanrService:ZanrService,
+              private location:Location, private activatedRoute:ActivatedRoute) { }
 
-  zanrovi=[{id:1, name: 'Drama'}, {id:2, name: 'Akcija'}, {id:3, name: 'Fantazija'},{id:4, name: 'Mjuzikl'}];
+  zanrovi!: zanrDTO[];
 
   form!: FormGroup;
 
-  movies=[
-    {naziv: 'Spider-Man', poster: 'https://m.media-amazon.com/images/M/MV5BZWMyYzFjYTYtNTRjYi00OGExLWE2YzgtOGRmYjAxZTU3NzBiXkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_FMjpg_UY720_.jpg'},
-    {naziv: 'Outside the wire', poster: 'https://m.media-amazon.com/images/M/MV5BNmM2MWQ0NzktNzU0OS00MjYzLTkxNDYtMzliNTA5ZmNkMmZlXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_FMjpg_UX1200_.jpg'},
-    {naziv: 'Moana', poster: 'https://m.media-amazon.com/images/M/MV5BMjI4MzU5NTExNF5BMl5BanBnXkFtZTgwNzY1MTEwMDI@._V1_FMjpg_UX1086_.jpg'}
-  ];
+  movies!: movieDTO[] | null;
 
-  originalFilmovi=this.movies;
+  inicijalneVrijednost:any;
 
   ngOnInit(): void {
     this.form=this.formBuilder.group({
@@ -29,21 +33,79 @@ export class MovieFilterComponent implements OnInit {
       uskoro: false,
       naProgramu: false
     });
+    this.inicijalneVrijednost=this.form.value;
+    this.readParamaterFromURL();
 
-    this.form.valueChanges.subscribe(value => {
-      this.movies=this.originalFilmovi;
-      this.filterFilmova(value);
-    });
+    this.zanrService.GetAllZanr().subscribe(zanr=>{
+      this.zanrovi=zanr;
+
+      this.filterFilmova(this.form.value);
+
+      this.form.valueChanges.subscribe(value => {
+        this.filterFilmova(value);
+        this.writeParamaterURL();
+      });
+    })
   }
 
   filterFilmova(values:any){
-    if(values.naziv){
-      this.movies=this.movies.filter(movie=>movie.naziv.indexOf(values.naziv)!==-1);
-
-    }
+    this.moviesService.filter(values).subscribe((response:HttpResponse<movieDTO[]>)=>{
+      this.movies=response.body;
+    })
   }
+
   ResetForme(){
-    this.form.reset();
+    this.form.patchValue(this.inicijalneVrijednost);
+  }
+
+  private readParamaterFromURL(){
+    this.activatedRoute.queryParams.subscribe(params => {
+      var obj:any={};
+
+      if(params['naziv']){
+        obj.naziv= params['naziv'];
+      }
+
+      if(params['zanrID']){
+        obj.zanrID= Number(params['zanrID']);
+      }
+
+      if(params['uskoro']){
+        obj.uskoro= params['uskoro'];
+      }
+
+      if(params['naProgramu']){
+        obj.naProgramu= params['naProgramu'];
+      }
+
+      this.form.patchValue(obj);
+    });
+  }
+
+  private writeParamaterURL(){
+    const queryStrings=[];
+    const formValues=this.form.value;
+    if(formValues.naziv){
+      queryStrings.push(`naziv=${formValues.naziv}`);
+    }
+
+    if(formValues.zanrID != '0'){
+      queryStrings.push(`zanrID=${formValues.zanrID}`);
+    }
+
+    if(formValues.uskoro){
+      queryStrings.push(`uskoro=${formValues.uskoro}`);
+    }
+
+    if(formValues.naProgramu){
+      queryStrings.push(`naProgramu=${formValues.naProgramu}`);
+    }
+
+    this.location.replaceState('movies/filter',queryStrings.join('&'));
+  }
+
+  onDelete(){
+    this.filterFilmova(this.form.value);
   }
 
 }

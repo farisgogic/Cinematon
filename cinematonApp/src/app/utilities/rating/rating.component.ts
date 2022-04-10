@@ -1,4 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {SecurityService} from "../../security/security.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-rating',
@@ -7,14 +9,14 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class RatingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private securityService:SecurityService) { }
 
   @Input()
   maxRating=5;
   @Input()
   selectedRate=0;
   @Output()
-  onRating: EventEmitter<void> = new EventEmitter<void>();
+  onRating: EventEmitter<number> = new EventEmitter<number>();
   ProslaOcjena=0;
   maxRatingNiz:any=[];
   ngOnInit(): void {
@@ -30,10 +32,15 @@ export class RatingComponent implements OnInit {
       this.selectedRate = 0;
     }
   }
+
   ocijeni(index:number){
-    this.selectedRate=index+1;
-    this.ProslaOcjena=this.selectedRate;
-    this.onRating.emit();
+    if(this.securityService.isAuthenticated()) {
+      this.selectedRate = index + 1;
+      this.ProslaOcjena = this.selectedRate;
+      this.onRating.emit(this.selectedRate);
+    }else{
+      Swal.fire("Greska", "Morate biti prijavljeni!", "error");
+    }
   }
 
 }

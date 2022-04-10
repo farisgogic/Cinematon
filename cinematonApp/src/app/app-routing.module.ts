@@ -7,20 +7,30 @@ import {CreateMovieComponent} from "./movies/create-movie/create-movie.component
 import {EditZanrComponent} from "./zanr/edit-zanr/edit-zanr.component";
 import {EditMovieComponent} from "./movies/edit-movie/edit-movie.component";
 import {MovieFilterComponent} from "./movies/movie-filter/movie-filter.component";
-import {KontaktComponent} from "./kontakt/kontakt.component";
+import {MovieDetaljiComponent} from "./movies/movie-detalji/movie-detalji.component";
+import {IsAdminGuard} from "./is-admin.guard";
+import {LoginComponent} from "./security/login/login.component";
+import {RegistracijaComponent} from "./security/registracija/registracija.component";
+import {KorisnikIndexComponent} from "./security/korisnik-index/korisnik-index.component";
+import {RezervacijaComponent} from "./rezervacija/rezervacija.component"
 
 const routes: Routes = [
   {path:'pocetna', component: PocetnaComponent},
 
-  {path: 'zanr', component: ZanrComponent},
-  {path: 'zanr/napraviNovi', component: NapraviNoviComponent},
-  {path: 'zanr/edit/:id', component: EditZanrComponent},
+  {path: 'zanr', component: ZanrComponent, canActivate:[IsAdminGuard]},
+  {path: 'zanr/napraviNovi', component: NapraviNoviComponent, canActivate:[IsAdminGuard]},
+  {path: 'zanr/edit/:id', component: EditZanrComponent, canActivate:[IsAdminGuard]},
 
-  {path: 'movies/create', component: CreateMovieComponent},
-  {path: 'movies/edit/:id', component: EditMovieComponent},
+  {path: 'movies/create', component: CreateMovieComponent, canActivate:[IsAdminGuard]},
+  {path: 'movies/edit/:id', component: EditMovieComponent, canActivate:[IsAdminGuard]},
   {path: 'movies/filter', component: MovieFilterComponent},
+  {path: 'movies/:id', component: MovieDetaljiComponent},
 
-  {path: 'kontakt', component:KontaktComponent},
+  {path: 'rezervacija', component: RezervacijaComponent},
+
+  {path: 'login', component: LoginComponent},
+  {path: 'registracija', component: RegistracijaComponent},
+  {path: 'korisnici', component: KorisnikIndexComponent, canActivate:[IsAdminGuard]},
 
   {path:'**',component: PocetnaComponent}
 ];

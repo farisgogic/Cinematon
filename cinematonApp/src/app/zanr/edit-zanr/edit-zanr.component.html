@@ -1,5 +1,8 @@
 <h2>Edit zanr</h2>
 
-<app-form-zanr *ngIf="model" [model]="model" (onSaveChanges)="SaveChanges($event)"></app-form-zanr>
+<app-form-zanr
+  *ngIf="model"
+  (onSaveChanges)="SaveChanges($event)"
+></app-form-zanr>
 
 <mat-spinner *ngIf="!model"></mat-spinner>

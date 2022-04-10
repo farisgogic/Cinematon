@@ -1,3 +1,11 @@
 <h2>Uredi film</h2>
 
-<app-form-movie [model]="model" (onSaveChanges)="SaveChanges($event)"></app-form-movie>
+<app-form-movie
+[model]="model"
+*ngIf="model"
+[NonSelectedZanr]="nonSelectedZanr"
+[SelectedZanr]="selectedZanr"
+(onSaveChanges)="SaveChanges($event)"
+></app-form-movie>
+
+<mat-spinner *ngIf="!model"></mat-spinner>

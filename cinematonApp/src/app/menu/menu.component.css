@@ -7,7 +7,30 @@ mat-toolbar{
 .mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button :hover{
   color: white;
   font-size: 18px;
+  font-family: Arbutus;
+  font-size: 16px;
+  color:#d6d6d6;
 }
 .mat-icon{
   font-size: 25px;
+  height: 30px;
+}
+
+app-authorize-view{
+  display:flex;
+}
+
+.razmak{
+  flex: 1 1 auto;
+}
+
+a.mat-focus-indicator.logo.mat-button.mat-button-base{
+  font-family: Bangers;
+  font-size: 36px;
+  color: #b70f0a;
+}
+.mat-toolbar.mat-primary{
+  background-color: black;
+  color: #b70f0a;
+
 }

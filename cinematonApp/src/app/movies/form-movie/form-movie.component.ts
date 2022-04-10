@@ -12,8 +12,7 @@ export class FormMovieComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder) { }
 
-  @Input()
-  model!: movieDTO;
+  @Input() model!: movieDTO;
 
   form!: FormGroup
 
@@ -34,17 +33,23 @@ export class FormMovieComponent implements OnInit {
       Trailer:'',
       Datum:'',
       Poster:'',
-      ZanrId:''
+      FilmoviZanr:[],
+      Cijena:''
     });
 
     if(this.model !== undefined){
       this.form.patchValue(this.model);
     }
+    this.form.get('Naslov')?.patchValue(this.model.naslov);
+    this.form.get('Trailer')?.patchValue(this.model.trailer);
+    this.form.get('Datum')?.patchValue(this.model.datum);
+    this.form.get('Opis')?.patchValue(this.model.opis);
+    this.form.get('Cijena')?.patchValue(this.model.cijena);
   }
 
   SaveChanges(){
     const zanrID=this.SelectedZanr.map(value => value.key);
-    this.form.get('ZanrId')?.setValue(zanrID);
+    this.form.get('FilmoviZanr')?.setValue(zanrID);
     this.onSaveChanges.emit(this.form.value);
   }
 
@@ -53,7 +58,7 @@ export class FormMovieComponent implements OnInit {
   }
 
   changeMarkdown(content:any){
-    this.form.get('Opis')?.setValue(content);
+    this.form.get('Opis')?.setValue(content.target.value);
   }
 
 }

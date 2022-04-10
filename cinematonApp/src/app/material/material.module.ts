@@ -9,6 +9,7 @@ import {MatSelectModule} from '@angular/material/select'
 import {MatCheckboxModule} from '@angular/material/checkbox'
 import {MatTabsModule} from '@angular/material/tabs'
 import{MatProgressSpinnerModule} from '@angular/material/progress-spinner'
+import {MatChipsModule} from '@angular/material/chips'
 
 @NgModule({
   declarations: [],
@@ -21,7 +22,8 @@ import{MatProgressSpinnerModule} from '@angular/material/progress-spinner'
     MatSelectModule,
     MatCheckboxModule,
     MatTabsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatChipsModule
   ],
   imports: [
     CommonModule

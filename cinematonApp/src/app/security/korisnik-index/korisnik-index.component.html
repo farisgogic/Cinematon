@@ -1,0 +1,40 @@
+<h2>Korisnici</h2>
+
+<app-generic-list [list]="korisnici!">
+    <ng-container content>
+        <table mat-table [dataSource]="korisnici!" class="mat-elevation-z8 table-index">
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef>Email</th>
+                <td mat-cell *matCellDef="let element">{{element.email}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Opcije">
+                <th mat-header-cell *matHeaderCellDef>Opcije</th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-flat-button color="primary"
+                            [swal]="{
+              title:'Potvrda',
+              text:'Jeste li sigurni da ovom korisniku zelite dodijeliti admina?',
+              showCancelButton: true
+            }"
+                            (confirm)="dodajAdmin(element.id)">
+                        Dodaj admina
+                    </button>
+
+                    <button mat-flat-button color="warn"
+                            [swal]="{
+              title:'Potvrda',
+              text:'Jeste li sigurni da ovom korisniku zelite ukloniti admina?',
+              showCancelButton: true
+            }"
+                            (confirm)="izbrisiAdmin(element.id)">
+                        Izbrisi admina
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="kolone"></tr>
+            <tr mat-row *matRowDef="let red; columns:kolone"></tr>
+        </table>
+    </ng-container>
+</app-generic-list>

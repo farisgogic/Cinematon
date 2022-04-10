@@ -1,0 +1,18 @@
+form{
+    max-width: 500px;
+    position: absolute;
+    top: 30%;
+    left: 30%;
+}
+
+mat-form-field{
+    width: 100%;
+}
+
+button{
+    margin-right: 1rem;
+}
+
+h2{
+    text-align: center;
+}

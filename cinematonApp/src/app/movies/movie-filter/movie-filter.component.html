@@ -9,7 +9,7 @@
   <mat-form-field appearance="outline">
     <mat-label>Zanr</mat-label>
     <mat-select formControlName="zanrID">
-      <mat-option *ngFor="let zanr of zanrovi" [value]="zanr.id">{{zanr.name}}</mat-option>
+      <mat-option *ngFor="let zanr of zanrovi" [value]="zanr.id">{{zanr.naziv}}</mat-option>
     </mat-select>
   </mat-form-field>
 
@@ -26,4 +26,4 @@
   </div>
 </form>
 
-<app-movies-list [movies]="movies"></app-movies-list>
+<app-movies-list (onDelete)="onDelete" [movies]="movies"></app-movies-list>

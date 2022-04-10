@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <span>
-    <a routerLink="pocetna" mat-button>
+    <a class="logo" routerLink="pocetna" mat-button>
       <mat-icon>local_movies</mat-icon>Cinematon</a>
   </span>
 
@@ -10,21 +10,40 @@
       Pretrazi Filmove</a>
   </div>
 
-  <div>
-    <a mat-button routerLink="kontakt">
-      Kontakt
-    </a>
+  <app-authorize-view [uloga]="'admin'">
+    <ng-container authorized>
+      <div>
+        <a mat-button routerLink="zanr">
+          Zanrovi
+        </a>
+      </div>
+
+      <div>
+        <a mat-button routerLink="korisnici">
+          Korisnici
+        </a>
+      </div>
+      <div>
+        <a mat-button routerLink="movies/create">
+          Dodaj film
+        </a>
+      </div>
+    </ng-container>
+  </app-authorize-view>
+
+  <div class="razmak">
+
   </div>
 
-  <div>
-    <a mat-button routerLink="zanr">
-      Zanrovi
-    </a>
-  </div>
+  <app-authorize-view>
+    <ng-container authorized>
+      <span>Zdravo, {{securityService.getFieldFromJWT('email')}}</span>
+      <a mat-button (click)="securityService.logout()" routerLink="pocetna">Odjava</a>
+    </ng-container>
+    <ng-container notAuthorized>
+      <a mat-button routerLink="login">Prijava</a>
+      <a mat-button routerLink="registracija">Registracija</a>
+    </ng-container>
+  </app-authorize-view>
 
-  <div>
-    <a mat-button routerLink="movies/create">
-      Dodaj film
-    </a>
-  </div>
 </mat-toolbar>

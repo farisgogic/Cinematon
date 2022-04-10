@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -8,7 +9,7 @@ using WebAPI.Entities;
 
 namespace WebAPI
 {
-    public class ApplicationDbContext:DbContext
+    public class ApplicationDbContext:IdentityDbContext
     {
         public ApplicationDbContext([NotNullAttribute] DbContextOptions options) : base(options)
         {
@@ -24,6 +25,11 @@ namespace WebAPI
         public DbSet<Zanr> Zanr { get; set; }
         public DbSet<Filmovi> Filmovi{ get; set; }
         public DbSet<FilmoviZanr> FilmoviZanr{ get; set; }
+        public DbSet<OcjenaFilma> OcjenaFilma{ get; set; }
+        public DbSet<Rezervacija> Rezervacija { get; set; }
+        public DbSet<Sjediste> Sjediste { get; set; }
+
+
 
     }
 }
