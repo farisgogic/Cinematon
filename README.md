@@ -16,7 +16,7 @@ Cinematon is Web Application built using Angular, REST API
 
 	```
 	$ npm install
-  ```
+  	```
   
 <!-- LOGIN -->
 ## Login 
