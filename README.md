@@ -9,8 +9,8 @@ Cinematon is Web Application built using Angular, REST API
 1. Clone or Download the repository
 
 	```
-	$ git clone https://github.com/bizarrecode/angular-crud-rest-api.git
-	$ cd angular-crud-rest-api
+	$ git clone https://github.com/farisgogic/Cinematon.git
+	$ cd Cinematon
 	```
 2. Install Dependencies
 
