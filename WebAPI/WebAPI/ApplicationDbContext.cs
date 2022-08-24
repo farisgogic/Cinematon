@@ -26,8 +26,6 @@ namespace WebAPI
         public DbSet<Filmovi> Filmovi{ get; set; }
         public DbSet<FilmoviZanr> FilmoviZanr{ get; set; }
         public DbSet<OcjenaFilma> OcjenaFilma{ get; set; }
-        public DbSet<Rezervacija> Rezervacija { get; set; }
-        public DbSet<Sjediste> Sjediste { get; set; }
 
 
 
