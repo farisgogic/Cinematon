@@ -5,9 +5,9 @@
         <a [routerLink]="'/movies/' + movie.id">
           <img [src]="movie.poster" alt="Poster" />
         </a>
-        <p>
+        <h1>
           <a [routerLink]="'/movies/' + movie.id">{{movie.naslov}}</a>
-        </p>
+        </h1>
         <div>
           <app-authorize-view [uloga]="'admin'">
             <ng-container authorized>

@@ -12,7 +12,11 @@ import {IsAdminGuard} from "./is-admin.guard";
 import {LoginComponent} from "./security/login/login.component";
 import {RegistracijaComponent} from "./security/registracija/registracija.component";
 import {KorisnikIndexComponent} from "./security/korisnik-index/korisnik-index.component";
-import {RezervacijaComponent} from "./rezervacija/rezervacija.component"
+import {RezervacijaComponent} from "./rezervacija/rezervacija.component";
+import { ListaRezervacijaComponent } from './rezervacija/lista-rezervacija/lista-rezervacija.component';
+import { SalaComponent } from './sala/sala/sala.component';
+import { DodajSaluComponent } from './sala/dodaj-salu/dodaj-salu.component';
+import { IsUserGuard } from './is-user.guard';
 
 const routes: Routes = [
   {path:'pocetna', component: PocetnaComponent},
@@ -26,11 +30,14 @@ const routes: Routes = [
   {path: 'movies/filter', component: MovieFilterComponent},
   {path: 'movies/:id', component: MovieDetaljiComponent},
 
-  {path: 'rezervacija', component: RezervacijaComponent},
+  {path: 'rezervacija', component: RezervacijaComponent, canActivate:[IsUserGuard]},
 
   {path: 'login', component: LoginComponent},
   {path: 'registracija', component: RegistracijaComponent},
   {path: 'korisnici', component: KorisnikIndexComponent, canActivate:[IsAdminGuard]},
+  {path: 'lista-rezervacija', component: ListaRezervacijaComponent, canActivate:[IsAdminGuard]},
+  {path: 'sala', component: SalaComponent, canActivate:[IsAdminGuard]},
+  {path: 'sala/dodaj-salu', component: DodajSaluComponent, canActivate:[IsAdminGuard]},
 
   {path:'**',component: PocetnaComponent}
 ];

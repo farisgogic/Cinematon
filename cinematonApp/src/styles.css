@@ -1,36 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
 
 /*html, body { height: 100%; }*/
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: black}
-
-
-.table-index{
-  width: 100%;
-  margin-top: 1rem;
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  background-image: url('../src/public/image/output-onlinepngtools.png');
+  
 }
 
-.table-index a{
-  margin-right: 1rem;
+body::after{
+  opacity: 0.5;
 }
+
+
 
 h2{
-  color:#fff;
   text-transform: uppercase;
 }
 
 .mat-form-field-appearance-outline .mat-form-field-flex{
-  background-color: #fff;
   border-radius: 15px;
 }
 
 .mat-checkbox-layout .mat-checkbox-label{
-  color: white;
+  color: black;
   margin-bottom: 10px;
   margin-top: 10px;
 }
 
 .mat-checkbox-inner-container{
-  background-color: white;
   margin-bottom: 20px;
   margin-top: 20px;
 }
@@ -45,21 +43,19 @@ h2{
 }
 
 .mat-stroked-button{
-  background-color: #fff;
   justify-content: center;
   align-items: center;
 }
 
-.table-index {
-  background-color: black;
-}
-
 th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type{
-  color: white;
+  color: black;
+  font-weight: bolder;
 }
 
 th.mat-header-cell:last-of-type{
-  color: white;
+  color: black;
+  font-weight: bolder;
+
 }
 
 .mat-progress-spinner circle, .mat-spinner circle{
@@ -81,28 +77,16 @@ th.mat-header-cell:last-of-type{
   text-align: center;
 }
 
-h1, h2, h3, h4{
-  color: white;
-}
-
 .mat-form-field-appearance-fill .mat-form-field-flex{
-  background-color: white;
 }
 
-.mat-tab-label{
-  color: white;
-}
-
-.mat-tab-body-content{
-  color: white;
-}
 
 .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
   color: black;
 }
 
-li{
-  color: white;
+ul, li{
+  color: black;
 }
 
 .mat-stroked-button:not(.mat-button-disabled) {

@@ -1,8 +1,14 @@
 <h2>Dodaj film</h2>
 
+<button type="button" mat-flat-button color="primary"  (click)="dodaj()" class="form-label">
+  Dodaj film
+</button>
+
 <app-form-movie
-  *ngIf="NonSelectedZanr"
+  *ngIf="showModal==true"
+  (closeModal)="showModal=false"
   [NonSelectedZanr]="NonSelectedZanr"
+  [NonSelectedSala]="NonSelectedSala"
   (onSaveChanges)="saveChanges($event)"
 ></app-form-movie>
 

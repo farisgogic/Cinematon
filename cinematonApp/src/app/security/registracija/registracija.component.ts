@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {KorisnickiPodaci} from "../security.model";
+import {KorisniciDTO, KorisnickiPodaci} from "../security.model";
 import {SecurityService} from "../security.service";
 import {parseWebAPIErrors} from "../../utilities/utils";
 import {Router} from "@angular/router";
@@ -14,8 +14,9 @@ export class RegistracijaComponent implements OnInit {
   constructor(private securityService:SecurityService, private router:Router) { }
 
   errors:string[]=[];
-
+  korisnici!:KorisniciDTO;
   ngOnInit(): void {
+    
   }
 
   registracija(podaci: KorisnickiPodaci){

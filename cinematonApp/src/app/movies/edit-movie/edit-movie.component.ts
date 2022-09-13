@@ -18,6 +18,11 @@ export class EditMovieComponent implements OnInit {
   selectedZanr!: VisestrukiOdabirModel[];
   nonSelectedZanr!: VisestrukiOdabirModel[];
 
+  selectedSala!: VisestrukiOdabirModel[];
+  nonSelectedSala!: VisestrukiOdabirModel[];
+
+  showEdit=false;
+
   ngOnInit(): void {
     this.activatedRouted.params.subscribe(params => {
       this.moviesService.putGet(params['id']).subscribe((putGetDTO:FilmoviPutGetDTO) => {
@@ -30,6 +35,14 @@ export class EditMovieComponent implements OnInit {
         this.nonSelectedZanr = putGetDTO.nonSelectedZanr.map(zanrDTO => {
           return <VisestrukiOdabirModel>({key:zanrDTO.id, value: zanrDTO.naziv});
         });
+
+        this.selectedSala = putGetDTO.selectedSala.map(salaDTO => {
+          return <VisestrukiOdabirModel>({key:salaDTO.id, value: salaDTO.ime});
+        });
+
+        this.nonSelectedSala = putGetDTO.nonSelectedSala.map(salaDTO => {
+          return <VisestrukiOdabirModel>({key:salaDTO.id, value: salaDTO.ime});
+        });
       });
     });
   }
@@ -38,5 +51,9 @@ export class EditMovieComponent implements OnInit {
     this.moviesService.edit(this.model.id, movieCreationDTO).subscribe(()=>{
       this.router.navigate(['/movies/'+this.model.id]);
     });
+  }
+
+  edit(){
+    this.showEdit=true;
   }
 }

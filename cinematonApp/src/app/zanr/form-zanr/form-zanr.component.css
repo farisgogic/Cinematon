@@ -1,4 +1,13 @@
-button{
+.mat-flat-button{
   margin-right: 10px;
 }
 
+.mat-flat-button:hover{
+  opacity: 0.9;
+}
+
+
+.mat-error{
+  font-size: 15px;
+  font-weight: bolder;
+}

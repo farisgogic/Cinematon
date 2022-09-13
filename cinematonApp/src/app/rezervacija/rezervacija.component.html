@@ -1,5 +1,16 @@
+<div *ngIf="movie">
+  <h1>Odaberite sjediste za film " {{movie.naslov}} " </h1>
 
 
-<ul>
-    <li *ngFor="let i of sa">{{i}}</li>
-</ul>
+  <div class="screen"></div>
+
+  <table>
+    <tr *ngFor="let place of filter">
+      <td [ngClass]='{red: place.zauzeto, gray: !place.zauzeto}'><button (click)="rez(place.id, place)"></button></td>
+    </tr>
+  </table>
+  
+</div>
+
+<button style="position: absolute; right: 35%; top: 48%;" (click)="zavrsi()" mat-flat-button color="warn">Zavrsi odabir</button>
+<h2 style="position: absolute; right: 45%; top: 50%;" >Ukupno za platiti {{cijena}} KM</h2>

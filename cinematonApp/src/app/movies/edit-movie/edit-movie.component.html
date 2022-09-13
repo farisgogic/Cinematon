@@ -1,10 +1,15 @@
 <h2>Uredi film</h2>
 
+<button mat-flat-button color="warn" (click)="edit()">Uredi</button>
+
 <app-form-movie
 [model]="model"
-*ngIf="model"
+*ngIf="showEdit==true"
+(closeModal)="showEdit=false"
 [NonSelectedZanr]="nonSelectedZanr"
-[SelectedZanr]="selectedZanr"
+[SelectedZanr]="selectedZanr" 
+[NonSelectedSala]="nonSelectedSala"
+[SelectedSala]="selectedSala" 
 (onSaveChanges)="SaveChanges($event)"
 ></app-form-movie>
 

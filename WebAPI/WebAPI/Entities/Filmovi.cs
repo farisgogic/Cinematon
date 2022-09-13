@@ -21,5 +21,7 @@ namespace WebAPI.Entities
         public List<FilmoviZanr> FilmoviZanr{ get; set; }
         public int Cijena { get; set; }
 
+        public List<FilmoviSala> FilmoviSala { get; set; }
+
     }
 }

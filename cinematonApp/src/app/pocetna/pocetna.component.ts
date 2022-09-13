@@ -17,13 +17,11 @@ export class PocetnaComponent implements OnInit{
 
   loadData() {
     this.movieService.getPocetnaFilmovi().subscribe(pocetnaDTO=>{
-      this.FilmoviUskoro=pocetnaDTO.uskoro;
       this.FilmoviNaProgramu=pocetnaDTO.naProgramu;
     })
   }
 
   FilmoviNaProgramu:any;
-  FilmoviUskoro:any;
 
   onDelete(){
     this.loadData();

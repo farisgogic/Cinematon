@@ -1,8 +1,29 @@
 mat-chip-list{
     display: inline-block;
     margin-bottom: 1rem;
+    color: black;
 }
 
 mat-chip{
     cursor: pointer;
+    color: black;
+}
+
+h2{
+    color: black;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 24px;
+}
+
+p{
+    color: black;
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+
+}
+
+button:hover{
+    opacity: 0.9;
 }

@@ -1,0 +1,9 @@
+
+<button mat-flat-button color="primary" (click)="dodaj()">Dodaj novu salu</button>
+
+
+<app-dodaj-salu
+  *ngIf="showModal==true"
+  (closeModal)="showModal=false"
+  (rezultat)="DodajSalu($event)"
+></app-dodaj-salu>

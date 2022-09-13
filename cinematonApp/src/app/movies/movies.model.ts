@@ -1,3 +1,4 @@
+import { salaDTO } from "../sala/sala/sala.model";
 import { zanrDTO } from "../zanr/zanr.model";
 
 export interface movieCreationDTO{
@@ -10,6 +11,7 @@ export interface movieCreationDTO{
   Trailer: string;
   FilmoviZanr: number[];
   Cijena: number;
+  SalaId:number[];
 }
 
 export interface movieDTO{
@@ -25,10 +27,13 @@ export interface movieDTO{
   prosjecnaOcjena:number;
   korisnickaOcjena:number;
   cijena: number;
+  sala:salaDTO[];
+  SalaId:number;
 }
 
 export interface FilmoviPostGetDTO{
   zanr: zanrDTO[];
+  sala: salaDTO[];
 }
 
 export interface PocetnaDTO{
@@ -40,4 +45,6 @@ export interface FilmoviPutGetDTO{
   filmovi: movieDTO;
   selectedZanr:zanrDTO[];
   nonSelectedZanr:zanrDTO[];
+  selectedSala:salaDTO[];
+  nonSelectedSala:salaDTO[];
 }

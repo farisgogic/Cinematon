@@ -1,0 +1,11 @@
+table.mat-table {
+    border-spacing: 0;
+    background-color: currentColor;
+    margin-top: 90px;
+}
+
+
+
+button:hover{
+    opacity: 0.9;
+}

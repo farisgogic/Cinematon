@@ -41,6 +41,9 @@ import {JwtInterceptorService} from "./security/jwt-interceptor.service";
 import { KorisnikIndexComponent } from './security/korisnik-index/korisnik-index.component';
 import {InputPriceFormatModule} from 'angular-input-price-format';
 import { RezervacijaComponent } from './rezervacija/rezervacija.component';
+import { ListaRezervacijaComponent } from './rezervacija/lista-rezervacija/lista-rezervacija.component';
+import { SalaComponent } from './sala/sala/sala.component';
+import { DodajSaluComponent } from './sala/dodaj-salu/dodaj-salu.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +71,10 @@ import { RezervacijaComponent } from './rezervacija/rezervacija.component';
     RegistracijaComponent,
     AuthenticationFormComponent,
     KorisnikIndexComponent,
-    RezervacijaComponent
+    RezervacijaComponent,
+    ListaRezervacijaComponent,
+    SalaComponent,
+    DodajSaluComponent
   ],
     imports: [
         BrowserModule,

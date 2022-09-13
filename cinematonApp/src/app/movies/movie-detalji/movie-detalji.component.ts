@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {MoviesService} from "../movies.service";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {movieDTO} from "../movies.model";
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 import {RatingService} from "../../utilities/rating.service";
 import Swal from 'sweetalert2';
+import { SecurityService } from 'src/app/security/security.service';
+import { KorisniciDTO } from 'src/app/security/security.model';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-movie-detalji',
@@ -18,7 +21,8 @@ export class MovieDetaljiComponent implements OnInit {
   trailerURL!: SafeResourceUrl;
 
   constructor(private moviesService: MoviesService, private activatedRoute:ActivatedRoute
-              , private sanitizer:DomSanitizer, private ratingService:RatingService) { }
+              , private sanitizer:DomSanitizer, private ratingService:RatingService
+              ,private router:Router, private securityService:SecurityService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params:Params)=>{
@@ -29,6 +33,7 @@ export class MovieDetaljiComponent implements OnInit {
       })
     })
   }
+
 
   generateYTURL(url:any): SafeResourceUrl{
     if(!url){
@@ -46,5 +51,12 @@ export class MovieDetaljiComponent implements OnInit {
     this.ratingService.ocjenaFilma(this.movie.id, Ocjena).subscribe(()=>{
       Swal.fire("Potvrda", "Uspjesno ste ocijenili film", "success");
     });
+  }
+
+  funkcija(){
+    this.router.navigate(
+      ['/rezervacija'],
+      { queryParams: { id: this.movie.id } }
+      );
   }
 }

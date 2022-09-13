@@ -16,7 +16,12 @@ export class MoviesService {
     return this.http.get<FilmoviPostGetDTO>(this.apiURL+'/PostGet');
   }
 
-  create(movie:movieCreationDTO):Observable<number>{
+  get():Observable<movieDTO[]>{
+    return this.http.get<movieDTO[]>(this.apiURL);
+
+  }
+
+  public create(movie:movieCreationDTO):Observable<number>{
     const formData=this.BuildFormData(movie);
     return this.http.post<number>(this.apiURL,formData);
   }
@@ -54,10 +59,11 @@ export class MoviesService {
     }
 
     formData.append('FilmoviZanr', JSON.stringify(movie.FilmoviZanr));
+    formData.append('SalaId', JSON.stringify(movie.SalaId));
 
     return formData;
   }
-
+  
   public getById(id:number):Observable<movieDTO>{
     return this.http.get<movieDTO>(`${this.apiURL}/${id}`);
   }

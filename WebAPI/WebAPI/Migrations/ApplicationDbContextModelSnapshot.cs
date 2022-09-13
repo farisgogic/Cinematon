@@ -253,6 +253,21 @@ namespace WebAPI.Migrations
                     b.ToTable("Filmovi");
                 });
 
+            modelBuilder.Entity("WebAPI.Entities.FilmoviSala", b =>
+                {
+                    b.Property<int>("SalaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FilmoviId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SalaId", "FilmoviId");
+
+                    b.HasIndex("FilmoviId");
+
+                    b.ToTable("FilmoviSala");
+                });
+
             modelBuilder.Entity("WebAPI.Entities.FilmoviZanr", b =>
                 {
                     b.Property<int>("FilmoviId")
@@ -266,6 +281,43 @@ namespace WebAPI.Migrations
                     b.HasIndex("ZanrId");
 
                     b.ToTable("FilmoviZanr");
+                });
+
+            modelBuilder.Entity("WebAPI.Entities.Klupa", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("filmoviId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("kolona")
+                        .HasColumnType("int");
+
+                    b.Property<string>("korisnikId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("red")
+                        .HasColumnType("int");
+
+                    b.Property<int>("salaId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("zauzeto")
+                        .HasColumnType("bit");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("korisnikId");
+
+                    b.HasIndex("salaId");
+
+                    b.ToTable("Klupa");
                 });
 
             modelBuilder.Entity("WebAPI.Entities.OcjenaFilma", b =>
@@ -293,44 +345,19 @@ namespace WebAPI.Migrations
                     b.ToTable("OcjenaFilma");
                 });
 
-            modelBuilder.Entity("WebAPI.Entities.Rezervacija", b =>
+            modelBuilder.Entity("WebAPI.Entities.Sala", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("FilmoviId")
-                        .HasColumnType("int");
+                    b.Property<string>("ime")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("KorisnikId")
-                        .HasColumnType("nvarchar(450)");
+                    b.HasKey("id");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("FilmoviId");
-
-                    b.HasIndex("KorisnikId");
-
-                    b.ToTable("Rezervacija");
-                });
-
-            modelBuilder.Entity("WebAPI.Entities.Sjediste", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("Kolona")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Red")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Sjediste");
+                    b.ToTable("Sala");
                 });
 
             modelBuilder.Entity("WebAPI.Entities.Zanr", b =>
@@ -401,6 +428,25 @@ namespace WebAPI.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("WebAPI.Entities.FilmoviSala", b =>
+                {
+                    b.HasOne("WebAPI.Entities.Filmovi", "Filmovi")
+                        .WithMany("FilmoviSala")
+                        .HasForeignKey("FilmoviId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebAPI.Entities.Sala", "Sala")
+                        .WithMany()
+                        .HasForeignKey("SalaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Filmovi");
+
+                    b.Navigation("Sala");
+                });
+
             modelBuilder.Entity("WebAPI.Entities.FilmoviZanr", b =>
                 {
                     b.HasOne("WebAPI.Entities.Filmovi", "Filmovi")
@@ -420,24 +466,24 @@ namespace WebAPI.Migrations
                     b.Navigation("Zanr");
                 });
 
-            modelBuilder.Entity("WebAPI.Entities.OcjenaFilma", b =>
+            modelBuilder.Entity("WebAPI.Entities.Klupa", b =>
                 {
-                    b.HasOne("WebAPI.Entities.Filmovi", "Filmovi")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "korisnik")
                         .WithMany()
-                        .HasForeignKey("FilmoviId")
+                        .HasForeignKey("korisnikId");
+
+                    b.HasOne("WebAPI.Entities.Sala", "Sala")
+                        .WithMany("Sjedista")
+                        .HasForeignKey("salaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Korisnik")
-                        .WithMany()
-                        .HasForeignKey("KorisnikId");
+                    b.Navigation("korisnik");
 
-                    b.Navigation("Filmovi");
-
-                    b.Navigation("Korisnik");
+                    b.Navigation("Sala");
                 });
 
-            modelBuilder.Entity("WebAPI.Entities.Rezervacija", b =>
+            modelBuilder.Entity("WebAPI.Entities.OcjenaFilma", b =>
                 {
                     b.HasOne("WebAPI.Entities.Filmovi", "Filmovi")
                         .WithMany()
@@ -456,7 +502,14 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Entities.Filmovi", b =>
                 {
+                    b.Navigation("FilmoviSala");
+
                     b.Navigation("FilmoviZanr");
+                });
+
+            modelBuilder.Entity("WebAPI.Entities.Sala", b =>
+                {
+                    b.Navigation("Sjedista");
                 });
 #pragma warning restore 612, 618
         }

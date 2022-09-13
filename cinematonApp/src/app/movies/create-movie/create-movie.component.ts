@@ -5,6 +5,7 @@ import {zanrDTO} from "../../zanr/zanr.model";
 import {MoviesService} from "../movies.service";
 import {map} from 'rxjs/operators';
 import {Router} from "@angular/router";
+import { salaDTO } from 'src/app/sala/sala/sala.model';
 
 @Component({
   selector: 'app-create-movie',
@@ -13,6 +14,9 @@ import {Router} from "@angular/router";
 })
 export class CreateMovieComponent implements OnInit {
   NonSelectedZanr: VisestrukiOdabirModel[]=[];
+  NonSelectedSala: VisestrukiOdabirModel[]=[];
+
+  showModal=false;
 
   constructor(private moviesService:MoviesService, private router:Router) { }
 
@@ -22,6 +26,10 @@ export class CreateMovieComponent implements OnInit {
       this.NonSelectedZanr = response.zanr.map((zanrDTO: zanrDTO) => {
         return <VisestrukiOdabirModel>({key:zanrDTO.id, value: zanrDTO.naziv});
       });
+
+      this.NonSelectedSala = response.sala.map((salaDTO: salaDTO) => {
+        return <VisestrukiOdabirModel>({key:salaDTO.id, value: salaDTO.ime});
+      });
     });
   }
 
@@ -29,6 +37,10 @@ export class CreateMovieComponent implements OnInit {
     this.moviesService.create(movieCreationDTO).subscribe(id => {
       this.router.navigate(['/movies/'+ id]);
     });
+  }
+
+  dodaj(){
+    this.showModal=true;
   }
 
 }

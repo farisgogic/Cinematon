@@ -36,13 +36,15 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("PostGet")]
-        public async Task<ActionResult<FilmoviCreationDTO>> PostGet()
+        public async Task<ActionResult<FilmoviPostGetDTO>> PostGet()
         {
-            var zanr = await context.Zanr.ToListAsync();
+            var zanr = await context.Zanr.OrderBy(x=>x.Naziv).ToListAsync();
+            var sala = await context.Sala.OrderBy(x => x.ime).ToListAsync();
 
             var zanrDTO = mapper.Map<List<ZanrDTO>>(zanr);
+            var salaDTO = mapper.Map<List<SalaDTO>>(sala);
 
-            return Ok(new FilmoviPostGetDTO() { Zanr = zanrDTO });
+            return new FilmoviPostGetDTO() { Zanr = zanrDTO, Sala = salaDTO };
         }
 
         [HttpGet]
@@ -73,9 +75,10 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<FilmoviDTO>> Get(int id)
         {
             var film = await context.Filmovi
-                .Include(x => x.FilmoviZanr).ThenInclude(x => x.Zanr).FirstOrDefaultAsync(x => x.Id == id);
+                .Include(x => x.FilmoviZanr).ThenInclude(x => x.Zanr)
+                .Include(x=>x.FilmoviSala).ThenInclude(x=>x.Sala).FirstOrDefaultAsync(x => x.Id == id);
 
-            if (film == null)
+            if (film == null)   
                 return NotFound();
 
             var prosjecnaOcjena = 0.0;
@@ -133,18 +136,26 @@ namespace WebAPI.Controllers
 
             var nonSelectedZanrDTO = mapper.Map<List<ZanrDTO>>(nonSelectedZanr);
 
+            var salaSelectedId = film.sala.Select(x => x.id).ToList();
+            var nonSelectedSala = await context.Sala.Where(x => !salaSelectedId.Contains(x.id)).ToListAsync();
+
+            var nonSelectedSalaDTO = mapper.Map<List<SalaDTO>>(nonSelectedSala);
+
             var response = new FilmoviPutGetDTO();
             response.filmovi = film;
             response.selectedZanr = film.zanr;
             response.nonSelectedZanr = nonSelectedZanrDTO;
-            
+            response.selectedSala = film.sala;
+            response.nonSelectedSala = nonSelectedSalaDTO;
+
             return response;
         }
-
+        [AllowAnonymous]
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, [FromForm] FilmoviCreationDTO filmoviCreationDTO)
         {
-            var film = await context.Filmovi.Include(x => x.FilmoviZanr).FirstOrDefaultAsync(x => x.Id == id);
+            var film = await context.Filmovi.Include(x => x.FilmoviZanr)
+                .Include(x=>x.FilmoviSala).FirstOrDefaultAsync(x => x.Id == id);
 
             if (film == null)
             {
@@ -188,6 +199,7 @@ namespace WebAPI.Controllers
             {
                 filmoviQueryable = filmoviQueryable.Where(x => x.FilmoviZanr.Select(y => y.ZanrId).Contains(filmoviFilterDTO.ZanrId));
             }
+
 
             var film = await filmoviQueryable.OrderBy(x => x.Naslov).ToListAsync();
             return mapper.Map<List<FilmoviDTO>>(film);

@@ -3,6 +3,7 @@ import {authenticationResponse, KorisniciDTO, KorisnickiPodaci} from "./security
 import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -28,16 +29,26 @@ export class SecurityService {
     return this.http.post(`${this.apiURL}/dodajAdmin`, JSON.stringify(korisnikId), {headers});
   }
 
+  dodajKorisnika(korisnikId:string){
+    const headers=new HttpHeaders('Content-Type: application/json');
+    return this.http.post(`${this.apiURL}/dodajKorisnika`, JSON.stringify(korisnikId), {headers});
+  }
+
   izbrisiAdmin(korisnikId:string){
     const headers=new HttpHeaders('Content-Type: application/json');
     return this.http.post(`${this.apiURL}/izbrisiAdmin`, JSON.stringify(korisnikId), {headers});
   }
 
+  izbrisiKorisnika(korisnikId:string){
+    const headers=new HttpHeaders('Content-Type: application/json');
+    return this.http.post(`${this.apiURL}/izbrisiKorisnika`, JSON.stringify(korisnikId), {headers});
+  }
+
   isAuthenticated():boolean{
     const token=localStorage.getItem(this.tokenKey);
-    if(!token)
+    if(!token){
       return false;
-
+    }
     const expiration = localStorage.getItem(this.expirationTokenKey);
     const datumIsticanja = new Date(expiration!);
 

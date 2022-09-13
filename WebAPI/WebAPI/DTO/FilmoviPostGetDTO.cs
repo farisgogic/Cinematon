@@ -9,5 +9,6 @@ namespace WebAPI.DTO
     public class FilmoviPostGetDTO
     {
         public List<ZanrDTO> Zanr { get; set; }
+        public List<SalaDTO> Sala { get; set; }
     }
 }

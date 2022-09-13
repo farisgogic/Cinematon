@@ -1,12 +1,12 @@
 <form (submit)="onSubmit.emit(form.value)" [formGroup]="form">
     <h2>{{action}}</h2>
     <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input formControlName="email" matInput />
+        <mat-label style="font-size: 15px; font-weight: bold;">Email</mat-label>
+        <input formControlName="email"  matInput />
         <mat-error>{{getEmailError()}}</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
-        <mat-label>Lozinka</mat-label>
+        <mat-label style="font-size: 15px; font-weight: bold;">Lozinka</mat-label>
         <input type="password" formControlName="lozinka" matInput />
         <mat-error>Lozinka je obavezna!</mat-error>
     </mat-form-field>
@@ -15,7 +15,7 @@
             {{action}}
         </button>
 
-        <a mat-stroked-button routerLink="/">
+        <a mat-flat-button color="warn" routerLink="/">
             Otkazi
         </a>
     </div>

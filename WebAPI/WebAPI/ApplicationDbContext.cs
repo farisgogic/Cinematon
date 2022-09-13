@@ -19,6 +19,9 @@ namespace WebAPI
         {
             modelBuilder.Entity<FilmoviZanr>().HasKey(x => new { x.FilmoviId, x.ZanrId });
 
+            modelBuilder.Entity<FilmoviSala>().HasKey(x => new { x.SalaId, x.FilmoviId });
+
+
             base.OnModelCreating(modelBuilder);
         }
 
@@ -26,6 +29,9 @@ namespace WebAPI
         public DbSet<Filmovi> Filmovi{ get; set; }
         public DbSet<FilmoviZanr> FilmoviZanr{ get; set; }
         public DbSet<OcjenaFilma> OcjenaFilma{ get; set; }
+        public DbSet<Klupa> Klupa { get; set; }
+        public DbSet<Sala> Sala { get; set; }
+        public DbSet<FilmoviSala> FilmoviSala { get; set; }
 
 
 

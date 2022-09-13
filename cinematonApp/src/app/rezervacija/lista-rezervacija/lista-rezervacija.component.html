@@ -1,0 +1,40 @@
+<table *ngFor="let b of mySetFilmova" style="display: table-caption; margin-right: 20px;">
+	<tr>
+		<h3>
+			<b>Filmovi</b>
+		</h3>
+		<td style="color: black; font-size: 24px;">
+			{{b}}	
+		</td> 
+
+	</tr>
+	<tr>
+		<h3>
+			<b>Korisnici</b>
+		</h3>
+        <td *ngFor="let c of ucitajKorisnike(b)" style="color: black; font-size: 24px;">
+			{{c}}
+		 </td>
+	</tr>
+	<tr >
+		<h3>
+			<b>Sjedista</b>
+		</h3>
+		<td *ngFor="let a of mySet" style="color: black; font-size: 24px;">
+			{{listaRez(a, b)}}	
+		
+		</td>
+
+	</tr>
+
+	<!-- <div>
+		<h3>
+			<b>Filmovi</b>
+			<div *ngFor="let a of mySetFilmova" style="color: black; font-size: 24px;">
+				{{a}}	
+				
+			</div>
+		</h3>
+
+	</div> -->
+</table>

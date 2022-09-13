@@ -70,9 +70,6 @@ export class MovieFilterComponent implements OnInit {
         obj.zanrID= Number(params['zanrID']);
       }
 
-      if(params['uskoro']){
-        obj.uskoro= params['uskoro'];
-      }
 
       if(params['naProgramu']){
         obj.naProgramu= params['naProgramu'];
@@ -93,9 +90,6 @@ export class MovieFilterComponent implements OnInit {
       queryStrings.push(`zanrID=${formValues.zanrID}`);
     }
 
-    if(formValues.uskoro){
-      queryStrings.push(`uskoro=${formValues.uskoro}`);
-    }
 
     if(formValues.naProgramu){
       queryStrings.push(`naProgramu=${formValues.naProgramu}`);

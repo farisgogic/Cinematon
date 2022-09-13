@@ -9,20 +9,29 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
+  top: 0;
+  padding: 0;
+  
 }
 
-p{
+h1{
   max-width: 225px;
-  height: 44px;
   font-size: 15px;
   font-weight: bold;
   margin-top: 10px;
+
 }
 
 img{
   width: 225px;
-  height: 300px;
+  min-height: 360px;
 }
+
+img:hover{
+  width: 250px;
+  min-height: 380px;
+}
+
 .mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary{
   margin-right: 15px;
 }
@@ -30,4 +39,10 @@ img{
 a{
   text-decoration: none;
   color: black;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+a:hover{
+  opacity: 0.8;
 }

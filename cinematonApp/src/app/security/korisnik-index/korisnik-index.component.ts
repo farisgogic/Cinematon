@@ -24,6 +24,7 @@ export class KorisnikIndexComponent implements OnInit {
         .subscribe((httpResponse: HttpResponse<KorisniciDTO[]>) => {
       this.korisnici=httpResponse.body;
       this.ukupnoZapisa=httpResponse.headers.get("ukupnoZapisa");
+
     });
   }
 

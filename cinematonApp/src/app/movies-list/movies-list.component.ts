@@ -23,4 +23,5 @@ export class MoviesListComponent implements OnInit {
       this.onDelete.emit();
     });
   }
+  
 }

@@ -17,10 +17,17 @@ namespace WebAPI.DTO
 
         public string Trailer { get; set; }
         public DateTime Datum { get; set; }
+        public int Cijena { get; set; }
+
+
         public IFormFile Poster { get; set; }
         [ModelBinder(BinderType = typeof(TypeBinder<List<int>>))]
         public List<int> FilmoviZanr { get; set; }
-        public int Cijena { get; set; }
+
+
+
+        [ModelBinder(BinderType = typeof(TypeBinder<List<int>>))]
+        public List<int> SalaId { get; set; }
 
     }
 }
