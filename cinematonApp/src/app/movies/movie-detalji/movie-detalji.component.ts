@@ -33,7 +33,7 @@ export class MovieDetaljiComponent implements OnInit {
       })
     })
   }
-
+  
 
   generateYTURL(url:any): SafeResourceUrl{
     if(!url){

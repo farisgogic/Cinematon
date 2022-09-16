@@ -65,6 +65,7 @@ export class RezervacijaComponent implements OnInit{
   
   zavrsi(){
     Swal.fire("Potvrda", `Sjedista su rezervisana, karte preuzmite na salteru. Ukupno za platiti ${this.cijena} KM`, "success");
+    this.cijena=0;
   }
 
   rezervisi(id:number, sjediste:SjedisteDTO){

@@ -8,4 +8,11 @@
 */
 .container{
   margin: 20px;
+  width: 100%;
+}
+
+@media (min-width: 1400px){
+  .container{
+    max-width: 90%;
+  }
 }

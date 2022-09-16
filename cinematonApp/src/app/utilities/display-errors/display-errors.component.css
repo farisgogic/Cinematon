@@ -1,8 +1,15 @@
 li{
-  color: red;
+  color: black;
   list-style: none;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
 }
 ul{
   border: 1px solid black;
-  background-color: #FFCCFF;
+  background-color: red;
+  width: 20%;
+  border-radius: 40px;
+  float: right;
+  padding: 10px;
 }

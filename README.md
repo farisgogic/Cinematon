@@ -34,3 +34,10 @@ Cinematon is Web Application built using Angular, REST API
   username: test@test.com
   password: Test123!
   ```
+
+3. User2
+
+  ```
+  username: proba@proba.com
+  password: Proba123!
+  ```

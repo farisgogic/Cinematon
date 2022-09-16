@@ -4,7 +4,7 @@
 body { 
   margin: 0; 
   font-family: Roboto, "Helvetica Neue", sans-serif; 
-  background-image: url('../src/public/image/output-onlinepngtools.png');
+  background-image: url('../src/public/image/imageedit_1_2276379269.png');
   
 }
 
@@ -19,7 +19,7 @@ h2{
 }
 
 .mat-form-field-appearance-outline .mat-form-field-flex{
-  border-radius: 15px;
+  border: 1px solid black;
 }
 
 .mat-checkbox-layout .mat-checkbox-label{

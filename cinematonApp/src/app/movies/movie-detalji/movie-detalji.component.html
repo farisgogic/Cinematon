@@ -9,7 +9,7 @@
             *ngFor="let zanr of movie.zanr">
                 {{zanr.naziv}}
             </mat-chip>
-        </mat-chip-list><p> | {{datum.toDateString()}} | Prosjecna ocjena: {{movie.prosjecnaOcjena}} | Vasa ocjena:
+        </mat-chip-list><p> | {{datum.toDateString()}} | Prosjecna ocjena: {{movie.prosjecnaOcjena | number:'.1-1'}} | Vasa ocjena:
         <app-rating (onRating)="onRating($event)" [selectedRate]="movie.korisnickaOcjena"></app-rating></p>
 
         <div style="display: flex; margin-top: 20px;">

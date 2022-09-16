@@ -9,6 +9,8 @@ form{
     width: 100%;
 }
 
+
+
 button{
     margin-right: 1rem;
 }
@@ -29,4 +31,5 @@ h2{
 .mat-error{
     font-size: 15px;
     font-weight: bolder;
+
 }
