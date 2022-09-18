@@ -60,14 +60,6 @@ namespace WebAPI.Controllers
             return NoContent();
         }
 
-        [HttpPost("dodajKorisnika")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsAdmin")]
-        public async Task<ActionResult> DodajKorisnika([FromBody] string korisnikId)
-        {
-            var korisnik = await userManager.FindByIdAsync(korisnikId);
-            await userManager.AddClaimAsync(korisnik, new Claim("role", "user"));
-            return NoContent();
-        }
 
         [HttpPost("izbrisiAdmin")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsAdmin")]
@@ -78,14 +70,7 @@ namespace WebAPI.Controllers
             return NoContent();
         }
 
-        [HttpPost("IzbrisiKorisnika")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsAdmin")]
-        public async Task<ActionResult> IzbrisiKorisnika([FromBody] string korisnikId)
-        {
-            var korisnik = await userManager.FindByIdAsync(korisnikId);
-            await userManager.RemoveClaimAsync(korisnik, new Claim("role", "user"));
-            return NoContent();
-        }
+        
 
         [HttpPost("create")]
         public async Task<ActionResult<AuthenticationResponse>> Create([FromBody] KorisnickiPodaci podaci)
@@ -95,7 +80,6 @@ namespace WebAPI.Controllers
 
             if (result.Succeeded)
             {
-                await DodajKorisnika(korisnik.Id);
                 return await NapraviTokenAsync(podaci);
             }
             

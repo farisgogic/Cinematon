@@ -51,17 +51,25 @@ export class RezervacijaComponent implements OnInit{
       this.filmid = params['id'];
     });
 
+    this.getFilm();
+
+    this.getSjediste();
+
+  } 
+
+  getFilm(){
     this.rezervacijaService.GetAll().subscribe((x:Sjediste[])=>{
       this.sjediste=x;
     });
+  }
 
+  getSjediste(){
     this.moviesService.getById(this.filmid).subscribe((movie:movieDTO)=>{
       this.movie=movie;
       this.filter = this.sjediste.filter((x)=> x.salaId == this.movie.sala[0].id)
       
-    });
-
-  } 
+    }); 
+  }
   
   zavrsi(){
     Swal.fire("Potvrda", `Sjedista su rezervisana, karte preuzmite na salteru. Ukupno za platiti ${this.cijena} KM`, "success");

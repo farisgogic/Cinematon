@@ -23,13 +23,12 @@ h1{
 }
 
 img{
-  width: 225px;
-  min-height: 360px;
+  width: 170px;
+  min-height: 300px;
 }
 
 img:hover{
-  width: 250px;
-  min-height: 380px;
+  width: 180px;
 }
 
 .mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary{

@@ -6,8 +6,6 @@ import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 import {RatingService} from "../../utilities/rating.service";
 import Swal from 'sweetalert2';
 import { SecurityService } from 'src/app/security/security.service';
-import { KorisniciDTO } from 'src/app/security/security.model';
-import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-movie-detalji',
