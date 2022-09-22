@@ -1,4 +1,4 @@
-<table *ngFor="let b of mySetFilmova" style="display: table-caption; margin-right: 20px;">
+<table *ngFor="let b of mySetFilmova" style="margin: 10px; ">
 	<tr>
 		<h3>
 			<b>Filmovi</b>
@@ -12,8 +12,9 @@
 		<h3>
 			<b>Korisnici</b>
 		</h3>
-        <td *ngFor="let c of ucitajKorisnike(b)" style="color: black; font-size: 24px;">
-			{{c}}
+        <td *ngFor="let c of ucitajKorisnike(b)" style="color: black; font-size: 24px;" >
+			<div>{{c}}</div>
+			
 		 </td>
 	</tr>
 	<tr >

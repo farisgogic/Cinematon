@@ -9,7 +9,7 @@ export class RatingService {
 
   constructor(private http:HttpClient) { }
 
-  private apiURL=environment.apiURL+'/OcjenaFilma';
+  private apiURL='https://webapi20220920183854.azurewebsites.net/api/OcjenaFilma';
 
   public ocjenaFilma(filmoviId:number, Ocjena:number){
     return this.http.post(this.apiURL, {filmoviId, Ocjena});

@@ -12,7 +12,7 @@ export class SecurityService {
 
   constructor(private http:HttpClient) { }
 
-  private apiURL=environment.apiURL+"/accounts";
+  private apiURL="https://webapi20220920183854.azurewebsites.net/api/accounts";
   private readonly tokenKey:string='token';
   private readonly expirationTokenKey:string ='token-istice'
   private readonly roleField = 'role';

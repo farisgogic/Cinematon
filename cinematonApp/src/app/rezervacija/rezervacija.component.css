@@ -31,12 +31,20 @@ tr{
 .screen {
     background-color: #fff;
     height: 70px;
-    width: 40%;
+    width: 20%;
     margin: 15px 0;
     transform: rotateX(-45deg);
     box-shadow: 0 10px 10px rgba(255, 255, 255, 0.7);
     position: fixed;
-    left: 31%;
+    left: 37.5%;
+}
+
+.zavrsi{
+    position: absolute; 
+    right: 50%; 
+    top: 55%;
+    text-align: center;
+    justify-content: center;
 }
 
 
@@ -56,4 +64,114 @@ h2{
 
 .mat-flat-button:hover{
     opacity: 0.9;
+
+}
+
+.placanje{
+    text-align: center;
+    justify-content: center;
+    position: absolute; 
+    bottom: 45%;
+    left: 40%;
+}
+
+@media screen and (max-width: 1572px){
+    .screen {
+        width: 25%;
+    }
+
+    .zavrsi{
+        right: 45%; 
+
+    }
+}
+
+@media screen and (max-width: 1060px){
+    .screen {
+        width: 30%;
+    }
+
+    .zavrsi{
+        right: 40%; 
+
+    }
+}
+
+@media screen and (max-width: 880px){
+    .screen {
+        width: 35%;
+    }
+
+    .zavrsi{
+        right: 40%; 
+
+    }
+}
+
+@media screen and (max-width: 768px){
+    .screen {
+        width: 40%;
+    }
+
+    .zavrsi{
+        right: 35%; 
+
+    }
+}
+
+@media screen and (max-width: 600px){
+    .screen {
+        width: 50%;
+        left: 30%;
+    }
+
+    .zavrsi{
+        right: 40%; 
+
+    }
+
+    .placanje{
+        right: 45%;
+    }
+
+    table{
+        left: 30%;
+    }
+}
+
+@media screen and (max-width: 400px){
+    h1{
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .screen {
+        width: 82%;
+        left: 10%;
+    }
+
+    table{
+        align-items: center;
+        justify-content: center;
+        top: 30%;
+        left: 15%;
+    }
+
+    .placanje{
+        text-align: center;
+        justify-content: center;
+        position: absolute; 
+        bottom: 30%;
+        right: 35%; 
+        margin-top: 30px;
+    }
+
+    .zavrsi{
+        position: absolute; 
+        right: 35%; 
+        top: 70%;
+        text-align: center;
+        justify-content: center;
+    }
+
 }

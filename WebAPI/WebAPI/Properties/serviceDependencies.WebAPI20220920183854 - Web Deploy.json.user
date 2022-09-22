@@ -1,0 +1,65 @@
+{
+  "dependencies": {
+    "mssql2": {
+      "restored": true,
+      "restoreTime": "2022-09-20T16:59:58.8863159Z"
+    },
+    "apis1": {
+      "restored": true,
+      "restoreTime": "2022-09-20T16:52:03.9780242Z"
+    },
+    "identityapp1": {
+      "restored": true,
+      "restoreTime": "2022-09-20T16:52:06.3827541Z"
+    },
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2022-09-20T19:23:37.4305109Z"
+    },
+    "secrets1": {
+      "restored": true,
+      "restoreTime": "2022-09-20T18:14:06.6308415Z"
+    },
+    "appInsights1": {
+      "restored": true,
+      "restoreTime": "2022-09-20T18:14:13.6619328Z"
+    }
+  },
+  "parameters": {
+    "mssql1.subscriptionId": {
+      "Name": "mssql1.subscriptionId",
+      "Type": "subscription",
+      "Value": "bdea71be-e063-46dc-87d9-0cb30ad592ca"
+    },
+    "WebAPI20220920183854.subscriptionId": {
+      "Name": "WebAPI20220920183854.subscriptionId",
+      "Type": "subscription",
+      "Value": "bdea71be-e063-46dc-87d9-0cb30ad592ca"
+    },
+    "WebAPI20220920183854.resourceGroupName": {
+      "Name": "WebAPI20220920183854.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "Cinematon"
+    },
+    "mssql1.resourceGroupName": {
+      "Name": "mssql1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "Cinematon"
+    },
+    "subscriptionId": {
+      "Name": "subscriptionId",
+      "Type": "subscription",
+      "Value": "bdea71be-e063-46dc-87d9-0cb30ad592ca"
+    },
+    "WebAPI20220920183854.resourceName": {
+      "Name": "WebAPI20220920183854.resourceName",
+      "Type": null,
+      "Value": "WebAPI20220920183854"
+    },
+    "WebAPI20220920183854.resourceGroupLocation": {
+      "Name": "WebAPI20220920183854.resourceGroupLocation",
+      "Type": null,
+      "Value": "eastus"
+    }
+  }
+}

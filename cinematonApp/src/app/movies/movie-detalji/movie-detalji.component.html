@@ -1,5 +1,5 @@
 <div *ngIf="movie" style="display: flex" xmlns="">
-    <div style="color: white">
+    <div class="container" style="color: white">
         <h2>{{movie.naslov}} ({{datum.getFullYear()}}) | Cijena karte: {{movie.cijena}} KM </h2>
 
         <mat-chip-list>
@@ -9,22 +9,23 @@
             *ngFor="let zanr of movie.zanr">
                 {{zanr.naziv}}
             </mat-chip>
-        </mat-chip-list><p> | {{datum.toDateString() | date: 'dd/MM/yyyy'}} | Prosjecna ocjena: {{movie.prosjecnaOcjena | number:'.1-1'}} | Vasa ocjena:
-        <app-rating (onRating)="onRating($event)" [selectedRate]="movie.korisnickaOcjena"></app-rating></p>
+        </mat-chip-list><p> | {{datum.toDateString() | date: 'dd/MM/yyyy'}} |</p>
+        
+        <p> Prosjecna ocjena: {{movie.prosjecnaOcjena | number:'.1-1'}} </p>  
+        
+        <p> Vasa ocjena: <app-rating (onRating)="onRating($event)" [selectedRate]="movie.korisnickaOcjena"></app-rating></p>
 
-        <div style="display: flex; margin-top: 20px;">
+        <div class="media" >
             <span style="display: inline-block; margin-right: 1rem; box-shadow: 5px 5px 4px #fff;">
                 <img src="{{movie.poster}}" style="width: 225px; height: 315px;"/>
             </span>
 
-            <div *ngIf="movie.trailer">
+            <div class="trailer" *ngIf="movie.trailer">
                 <iframe
-                width="560"
-                height="315"
-                [src]="trailerURL"
-                frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
+                    [src]="trailerURL"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
                 </iframe>
             </div>
         </div>

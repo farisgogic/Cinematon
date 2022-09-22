@@ -1,5 +1,5 @@
 <div *ngIf="movie">
-  <h1>Odaberite sjediste za film " {{movie.naslov}} " </h1>
+  <h1>Odaberite sjediste za film "{{movie.naslov}}" </h1>
 
 
   <div class="screen"></div>
@@ -12,5 +12,5 @@
   
 </div>
 
-<button style="position: absolute; right: 35%; top: 48%;" (click)="zavrsi()" mat-flat-button color="warn">Zavrsi odabir</button>
-<h2 style="position: absolute; right: 45%; top: 50%;" >Ukupno za platiti {{cijena}} KM</h2>
+<button class="zavrsi" (click)="zavrsi()" mat-flat-button color="warn">Zavrsi odabir</button>
+<h2 class="placanje" >Ukupno za platiti {{cijena}} KM</h2>

@@ -9,11 +9,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAPI.DTO;
 using WebAPI.Entities;
+using System.Web.Http.Cors;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class SjedisteController : ControllerBase
     {
         private readonly ApplicationDbContext context;

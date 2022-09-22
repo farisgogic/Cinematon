@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "restored": true,
+      "restoreTime": "2022-09-20T18:11:41.8592893Z"
+    },
+    "appInsights1": {
+      "restored": true,
+      "restoreTime": "2022-09-20T18:11:53.3260692Z"
+    }
+  },
+  "parameters": {
+    "appInsights1.resourceGroupName": {
+      "Name": "appInsights1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "Cinematon"
+    },
+    "appInsights1.subscriptionId": {
+      "Name": "appInsights1.subscriptionId",
+      "Type": "subscription",
+      "Value": "bdea71be-e063-46dc-87d9-0cb30ad592ca"
+    }
+  }
+}

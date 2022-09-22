@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ZanrService {
-  private apiURL=environment.apiURL+'/zanr'
+  private apiURL='https://webapi20220920183854.azurewebsites.net/api/zanr'
   constructor(private _http:HttpClient) { }
 
   GetAllZanr(): Observable<zanrDTO[]>{

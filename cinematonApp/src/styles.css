@@ -5,7 +5,13 @@ body {
   margin: 0; 
   font-family: Roboto, "Helvetica Neue", sans-serif; 
   background-image: url('../src/public/image/imageedit_1_2276379269.png');
-  
+  width: 100%;
+  overflow-x: hidden;
+
+}
+html{
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body::after{

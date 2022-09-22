@@ -9,24 +9,18 @@ import { Observable } from "rxjs";
 })
 
 export class RezervacijaService{
-    private apiURL=environment + '/Sjediste';
+    private apiURL='https://webapi20220920183854.azurewebsites.net/api/Sjediste';
     constructor(private http:HttpClient) {}
 
   GetAll(): Observable<Sjediste[]>{
-      return this.http.get<Sjediste[]>(
-        'https://localhost:44383/api/Sjediste'
-      );
+    return this.http.get<Sjediste[]>('https://webapi20220920183854.azurewebsites.net/api/Sjediste');
   }
 
   GetById(id:number){
-    return this.http.get(
-      'https://localhost:44383/api/Sjediste/'+id
-    );
+    return this.http.get(`${this.apiURL}/${id}`);
   }
 
   update(id:number, sjediste:SjedisteDTO){
-    return this.http.patch(
-      'https://localhost:44383/api/Sjediste/' + id, sjediste
-    );
+    return this.http.patch(`${this.apiURL}/${id}`, sjediste);
   }
 }

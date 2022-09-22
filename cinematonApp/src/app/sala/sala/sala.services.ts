@@ -11,7 +11,7 @@ import {Observable} from "rxjs";
 })
 
 export class SalaService{
-    apiURL=environment.apiURL+'/Sala';
+    apiURL='https://webapi20220920183854.azurewebsites.net/api/Sala';
     constructor(private http:HttpClient){}
 
     create(sala:salaCreationDTO){

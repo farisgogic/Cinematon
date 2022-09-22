@@ -9,7 +9,7 @@ import {formatDate} from "@angular/common";
   providedIn: 'root'
 })
 export class MoviesService {
-  private apiURL=environment.apiURL+'/Filmovi';
+  private apiURL= 'https://webapi20220920183854.azurewebsites.net/api/Filmovi';
   constructor(private http:HttpClient) { }
 
   postGet():Observable<FilmoviPostGetDTO>{

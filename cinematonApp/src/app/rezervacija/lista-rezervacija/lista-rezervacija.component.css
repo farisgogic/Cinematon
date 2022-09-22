@@ -8,3 +8,20 @@ td{
     border: 1px solid black;
     font-weight: bold;
 }
+
+table{
+    display: table-caption;
+     margin-right: 50px;
+
+}
+
+@media screen and (max-width: 500px){
+    tr{
+      display: block;
+      justify-content: space-between;
+
+    }
+    td{
+        justify-content: space-evenly;
+    }
+}

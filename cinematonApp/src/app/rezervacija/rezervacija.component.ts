@@ -1,11 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { getMatFormFieldMissingControlError } from '@angular/material/form-field';
 import { ActivatedRoute, GuardsCheckStart, Params, Route, Router, RouterEvent } from '@angular/router';
 import Swal from 'sweetalert2';
 import { movieDTO } from '../movies/movies.model';
 import { MoviesService } from '../movies/movies.service';
 import { salaDTO } from '../sala/sala/sala.model';
-import { SalaService } from '../sala/sala/sala.services';
 import { SecurityService } from '../security/security.service';
 import { Sjediste, SjedisteDTO } from './rezervacija.model';
 import {RezervacijaService} from "./rezervacija.service";
@@ -37,16 +36,11 @@ export class RezervacijaComponent implements OnInit{
     private securityService:SecurityService, 
     private moviesService:MoviesService,
     private route:ActivatedRoute,
-    private router:Router
+  
     ) {}
 
   ngOnInit(): void {
 
-    this.loadData();
-
-  }
-
-  loadData(){
     this.route.queryParams.subscribe(params => {
       this.filmid = params['id'];
     });
@@ -55,20 +49,30 @@ export class RezervacijaComponent implements OnInit{
 
     this.getSjediste();
 
-  } 
+  }
+
+  // loadData(){
+  //   this.route.queryParams.subscribe(params => {
+  //     this.filmid = params['id'];
+  //   });
+
+  //   this.getFilm();
+
+  //   this.getSjediste();
+
+  // } 
 
   getFilm(){
+    this.moviesService.getById(this.filmid).subscribe((movie:movieDTO)=>{
+      this.movie=movie;
+      this.filter = this.sjediste.filter((x)=> x.salaId == this.movie.sala[0].id)  
+    }); 
+  }
+  
+  getSjediste(){
     this.rezervacijaService.GetAll().subscribe((x:Sjediste[])=>{
       this.sjediste=x;
     });
-  }
-
-  getSjediste(){
-    this.moviesService.getById(this.filmid).subscribe((movie:movieDTO)=>{
-      this.movie=movie;
-      this.filter = this.sjediste.filter((x)=> x.salaId == this.movie.sala[0].id)
-      
-    }); 
   }
   
   zavrsi(){

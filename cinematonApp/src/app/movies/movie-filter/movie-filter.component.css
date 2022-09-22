@@ -28,3 +28,10 @@ h2{
 .mat-flat-button:hover{
   opacity: 0.9;
 }
+
+@media screen and (max-width: 768px){
+  form mat-form-field{
+    width: 60%;
+    display: block;
+  }
+}
