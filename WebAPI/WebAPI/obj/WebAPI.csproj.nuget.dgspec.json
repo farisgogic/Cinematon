@@ -52,6 +52,10 @@
               "target": "Package",
               "version": "[11.0.0, )"
             },
+            "MailKit": {
+              "target": "Package",
+              "version": "[3.4.1, )"
+            },
             "Microsoft.ApplicationInsights.AspNetCore": {
               "target": "Package",
               "version": "[2.15.0, )"
@@ -87,6 +91,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[4.2.0, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[3.4.1, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
