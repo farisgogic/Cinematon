@@ -1,5 +1,5 @@
 <div *ngIf="movie" style="display: flex" xmlns="">
-    <div class="container" style="color: white">
+    <div class="container" >
         <h2>{{movie.naslov}} ({{datum.getFullYear()}}) | Cijena karte: {{movie.cijena}} KM </h2>
 
         <mat-chip-list>
@@ -31,7 +31,7 @@
         </div>
 
         <div style="margin-top: 1rem; color: black;font-size: 16px;
-        font-weight: bold; font-family: Georgia, 'Times New Roman', Times, serif;">
+        font-weight: bold; font-family: Poppins;">
             <h2>Opis</h2>
             <div>
                 <markdown [data]="movie.opis" ngPreserveWhitespaces></markdown>

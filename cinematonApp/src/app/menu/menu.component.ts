@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, HostListener, OnInit } from '@angular/core';
 import {SecurityService} from "../security/security.service";
 
 @Component({
@@ -8,10 +8,18 @@ import {SecurityService} from "../security/security.service";
 })
 export class MenuComponent implements OnInit {
 
+  menu_icon_variable: boolean = false;
+  menuVariable: boolean = false;
+
   constructor(public securityService:SecurityService) { }
 
   ngOnInit(): void {
   }
 
+  
+  openMenu() {
+    this.menuVariable =! this.menuVariable;
+    this.menu_icon_variable =! this.menu_icon_variable;
+  }
   
 }

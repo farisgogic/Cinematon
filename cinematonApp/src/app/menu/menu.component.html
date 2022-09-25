@@ -1,61 +1,59 @@
-<mat-toolbar color="primary">
-  <span>
-    <a class="logo" routerLink="pocetna" mat-button>
-      <mat-icon>local_movies</mat-icon>Cinematon</a>
-  </span>
+<header>
+  <div class="container">
 
-  <input type="checkbox"  class="openSidebarMenu" id="openSidebarMenu">
-  <label for="openSidebarMenu" class="sidebarIconToggle">
-      <div class="spinner diagonal part-1"></div>
-      <div class="spinner horizontal"></div>
-      <div class="spinner diagonal part-2"></div>
-  </label>
-  <div id="sidebarMenu">
-        <div class="main-content-wrapper" >
-          
-          
-          <a href="movies/filter">Pretrazi Filmove</a>
-          
-          <app-authorize-view [uloga]="'admin'">
-            <ng-container authorized>
-              <a href="zanr">Zanrovi</a>
-              <a href="korisnici">Korisnici</a>
-              <a href="movies/create">Dodaj film</a>
-              <a href="lista-rezervacija">Lista rezervacija</a>
-              <a href="sala">Dodaj salu</a>
-            </ng-container>
-          </app-authorize-view>
-          
-          <app-authorize-view style="position: absolute; right: 0%;">
-            <ng-container authorized>
-              <a style="color: red;">Pozdrav, {{securityService.getFieldFromJWT('email')}}</a>
-              <a (click)="securityService.logout()" href="pocetna" style="color: red;">Odjava</a>
-            </ng-container>
-
-            <ng-container notAuthorized>
-              <a href="login" style="color: red;">Prijava</a>
-              <a href="registracija" style="color: red;">Registracija</a>
-            </ng-container>
-          </app-authorize-view>
-          
+    <div class="row">
+      <div class="col-md-3 col-sm-3 col-xs-3">
+        <div class="logo">
+          <span>
+            <a routerLink="pocetna" mat-button>
+              <mat-icon>local_movies</mat-icon>Cinematon</a>
+          </span>
         </div>
+
+      </div>
+
+
+      <div class="col-md-9 col-sm-9 col-9 text-end">
+
+
+      <div class="menu_icon" [class.menu_iconClass]="menu_icon_variable" (click)="openMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+      </div>
+
+
+        <div class="menu" [class.menuClasse]="menuVariable">
+          <ul>
+            <app-authorize-view [uloga]="'admin'">
+              <ng-container authorized>
+                <li><a href="zanr">Zanrovi</a></li>
+                <li><a href="korisnici">Korisnici</a></li>
+                <li><a href="movies/create">Dodaj film</a></li>
+                <li> <a href="sala">Dodaj salu</a></li>
+              </ng-container>
+            </app-authorize-view>
+
+            <li><a href="movies/filter">Pretrazi Filmove</a></li>
+
+            <app-authorize-view  >
+              <ng-container authorized>
+                <li><a style="color: red;">Pozdrav, {{securityService.getFieldFromJWT('email')}}</a></li>
+                <li><a (click)="securityService.logout()" href="pocetna" style="color: red;">Odjava</a></li>
+              </ng-container>
+  
+              <ng-container notAuthorized>
+                <li><a href="login" style="color: red;">Prijava</a></li>
+                <li><a href="registracija" style="color: red;">Registracija</a></li>
+              </ng-container>
+            </app-authorize-view>
+
+          </ul>
+        </div>
+
+      </div>
+
     </div>
 
-
-<!-- 
-  <div class="razmak">
-
-  </div> -->
-
-  <!-- <app-authorize-view>
-    <ng-container authorized>
-      <span>Zdravo, {{securityService.getFieldFromJWT('email')}}</span>
-      <a mat-button (click)="securityService.logout()" routerLink="pocetna">Odjava</a>
-    </ng-container>
-    <ng-container notAuthorized>
-      <a mat-button routerLink="login">Prijava</a>
-      <a mat-button routerLink="registracija">Registracija</a>
-    </ng-container>
-  </app-authorize-view> -->
-
-</mat-toolbar>
+  </div>
+</header>

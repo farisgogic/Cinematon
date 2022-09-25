@@ -13,7 +13,6 @@
   padding: 0;
   width: 100%;
   word-wrap: break-word;
-  justify-content: space-between;
   text-align: center;
 
 }
@@ -54,5 +53,6 @@ a:hover{
 @media screen and (max-width: 1234){
   .movies-container{
     display: none;
+  
   }
 }

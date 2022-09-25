@@ -3,6 +3,7 @@ form{
     position: absolute;
     top: 30%;
     left: 35%;
+    align-items: center;
 }
 
 .mat-form-field{
@@ -29,23 +30,52 @@ h2{
 }
 
 .mat-error{
-    font-size: 15px;
+    font-size: 10px;
     font-weight: bolder;
 
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 414px){
+    form{
+        left: 25%;
+    }
+}
+
+@media screen and (max-width: 375px){
     form{
         left: 20%;
     }
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 768px){
     form{
-        left: 35%;
+        justify-content: center;
     }
     .mat-form-field{
         display: block;
         width: 100%;
     }
+
+}
+
+@media screen and (max-width: 940px){
+    form{
+        justify-content: center;
+    }
+    .mat-form-field{
+        display: block;
+        width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 1024px){
+    form{
+        justify-content: center;
+    }
+    .mat-form-field{
+        display: block;
+        width: 100%;
+    }
+
 }

@@ -3,10 +3,9 @@
     <ng-content select="[loading]"></ng-content>
   </span>
   <span *ngIf="!loading.innerHTML.trim()">
-    <img
-      *ngIf="!list"
-      src="https://icon-library.com/images/spinner-icon-gif/spinner-icon-gif-24.jpg"
-    />
+   
+      <mat-spinner *ngIf="!list"></mat-spinner>
+  
   </span>
 </div>
 

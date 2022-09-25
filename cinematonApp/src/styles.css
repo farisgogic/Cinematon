@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
+
+
 
 /*html, body { height: 100%; }*/
 body { 
@@ -22,6 +25,8 @@ body::after{
 
 h2{
   text-transform: uppercase;
+  font-family: Poppins;
+
 }
 
 .mat-form-field-appearance-outline .mat-form-field-flex{

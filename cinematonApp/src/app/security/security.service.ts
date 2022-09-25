@@ -29,20 +29,12 @@ export class SecurityService {
     return this.http.post(`${this.apiURL}/dodajAdmin`, JSON.stringify(korisnikId), {headers});
   }
 
-  dodajKorisnika(korisnikId:string){
-    const headers=new HttpHeaders('Content-Type: application/json');
-    return this.http.post(`${this.apiURL}/dodajKorisnika`, JSON.stringify(korisnikId), {headers});
-  }
 
   izbrisiAdmin(korisnikId:string){
     const headers=new HttpHeaders('Content-Type: application/json');
     return this.http.post(`${this.apiURL}/izbrisiAdmin`, JSON.stringify(korisnikId), {headers});
   }
 
-  izbrisiKorisnika(korisnikId:string){
-    const headers=new HttpHeaders('Content-Type: application/json');
-    return this.http.post(`${this.apiURL}/izbrisiKorisnika`, JSON.stringify(korisnikId), {headers});
-  }
 
   isAuthenticated():boolean{
     const token=localStorage.getItem(this.tokenKey);

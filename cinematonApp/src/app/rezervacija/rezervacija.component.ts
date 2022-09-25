@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, GuardsCheckStart, Params, Route, Router, RouterEvent } from '@angular/router';
+import { BehaviorSubject, switchMap } from 'rxjs';
 import Swal from 'sweetalert2';
 import { movieDTO } from '../movies/movies.model';
 import { MoviesService } from '../movies/movies.service';
@@ -20,6 +21,8 @@ import {RezervacijaService} from "./rezervacija.service";
 export class RezervacijaComponent implements OnInit{
 
   sjediste!:Sjediste[];
+
+  refreshShedista = new BehaviorSubject<boolean>(true);
 
   movie!:movieDTO;
 
@@ -72,6 +75,7 @@ export class RezervacijaComponent implements OnInit{
   getSjediste(){
     this.rezervacijaService.GetAll().subscribe((x:Sjediste[])=>{
       this.sjediste=x;
+      this.refreshShedista.pipe(switchMap(_ => this.rezervacijaService.GetAll()));
     });
   }
   

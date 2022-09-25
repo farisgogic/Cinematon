@@ -4,13 +4,14 @@ import {SecurityService} from "../security.service";
 import {parseWebAPIErrors} from "../../utilities/utils";
 import {Router} from "@angular/router";
 
+
 @Component({
   selector: 'app-registracija',
   templateUrl: './registracija.component.html',
   styleUrls: ['./registracija.component.css']
 })
 export class RegistracijaComponent implements OnInit {
-
+  
   constructor(private securityService:SecurityService, private router:Router) { }
 
   errors:string[]=[];
@@ -24,7 +25,7 @@ export class RegistracijaComponent implements OnInit {
     this.securityService.registracija(podaci).subscribe(response=>{
       this.securityService.snimiToken(response);
       this.router.navigate(['/']);
-    }, error => this.errors=parseWebAPIErrors(error));
-  }
+    }, error=>this.errors=parseWebAPIErrors(error));
 
+  }
 }

@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,15 +30,17 @@ namespace WebAPI.Controllers
         private readonly IConfiguration configuration;
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
+        private readonly RoleManager<IdentityRole> roleManager;
 
         public AccountsController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-            IConfiguration configuration, ApplicationDbContext context, IMapper mapper)
+            IConfiguration configuration, ApplicationDbContext context, IMapper mapper, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.configuration = configuration;
             this.context = context;
             this.mapper = mapper;
+            this.roleManager = roleManager;
         }
 
         [HttpGet("listKorisnik")]
@@ -61,6 +64,7 @@ namespace WebAPI.Controllers
         }
 
 
+
         [HttpPost("izbrisiAdmin")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsAdmin")]
         public async Task<ActionResult> IzbrisiAdmin([FromBody] string korisnikId)
@@ -70,7 +74,19 @@ namespace WebAPI.Controllers
             return NoContent();
         }
 
-        
+       
+
+        [HttpPost("dodajUlogu")]
+        public async Task<IActionResult> DodajUlogu(Uloga uloga)
+        {
+            var ulogapostoji = await roleManager.RoleExistsAsync(uloga.Naziv);
+            if (!ulogapostoji)
+            {
+                var result = await roleManager.CreateAsync(new IdentityRole(uloga.Naziv));
+            }
+
+            return Ok();
+        }
 
         [HttpPost("create")]
         public async Task<ActionResult<AuthenticationResponse>> Create([FromBody] KorisnickiPodaci podaci)
@@ -80,14 +96,16 @@ namespace WebAPI.Controllers
 
             if (result.Succeeded)
             {
+                await userManager.AddClaimAsync(korisnik, new Claim("role", "user"));
                 return await NapraviTokenAsync(podaci);
+
             }
-            
+
             else
             {
-                return BadRequest(result.Errors);
+                return BadRequest("Lozinka mora sadrzavati minimalno 6 karaktera");
             }
-        }
+        } 
 
 
         [HttpPost("login")]
@@ -98,6 +116,7 @@ namespace WebAPI.Controllers
             if (result.Succeeded)
             {
                 return await NapraviTokenAsync(podaci);
+
             }
             else
             {
