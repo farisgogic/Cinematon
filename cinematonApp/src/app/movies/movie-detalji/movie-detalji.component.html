@@ -9,7 +9,7 @@
             *ngFor="let zanr of movie.zanr">
                 {{zanr.naziv}}
             </mat-chip>
-        </mat-chip-list><p> | {{datum.toDateString() | date: 'dd/MM/yyyy'}} |</p>
+        </mat-chip-list><p>  {{datum.toDateString() | date: 'dd/MM/yyyy'}} </p>
         
         <p> Prosjecna ocjena: {{movie.prosjecnaOcjena | number:'.1-1'}} </p>  
         

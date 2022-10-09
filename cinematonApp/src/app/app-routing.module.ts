@@ -17,6 +17,9 @@ import { ListaRezervacijaComponent } from './rezervacija/lista-rezervacija/lista
 import { SalaComponent } from './sala/sala/sala.component';
 import { DodajSaluComponent } from './sala/dodaj-salu/dodaj-salu.component';
 import { IsUserGuard } from './is-user.guard';
+import { ResetPasswordComponent } from './security/reset-password/reset-password.component';
+import { ChangePasswordComponent } from './security/change-password/change-password.component';
+import { PotvrdaEmailaComponent } from './security/potvrda-emaila/potvrda-emaila.component';
 
 const routes: Routes = [
   {path:'pocetna', component: PocetnaComponent},
@@ -34,10 +37,17 @@ const routes: Routes = [
 
   {path: 'login', component: LoginComponent},
   {path: 'registracija', component: RegistracijaComponent},
+  
+  {path: 'resetpassword', component: ResetPasswordComponent},
+  {path: 'change-password', component: ChangePasswordComponent},
+  {path: 'potvrda-emaila', component: PotvrdaEmailaComponent},
+
   {path: 'korisnici', component: KorisnikIndexComponent, canActivate:[IsAdminGuard]},
   {path: 'lista-rezervacija', component: ListaRezervacijaComponent, canActivate:[IsAdminGuard]},
   {path: 'sala', component: SalaComponent, canActivate:[IsAdminGuard]},
   {path: 'sala/dodaj-salu', component: DodajSaluComponent, canActivate:[IsAdminGuard]},
+
+
 
   {path:'**',component: PocetnaComponent}
 ];

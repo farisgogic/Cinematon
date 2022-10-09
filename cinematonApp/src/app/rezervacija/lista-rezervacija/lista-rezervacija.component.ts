@@ -30,10 +30,10 @@ export class ListaRezervacijaComponent implements OnInit {
     private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-  
+
     this.loadReservation();
   }
-  
+
 
   loadReservation(){
     this.rezervacijaService.GetAll().subscribe((x:Sjediste[])=>{
@@ -45,17 +45,16 @@ export class ListaRezervacijaComponent implements OnInit {
           }
       }
     });
-    
+
   }
   listaRez(korisnik:any, id:any) {
     this.niz=[]
     for (let item = 0; item < this.sjediste.length; item++) {
       if(korisnik == this.sjediste[item].email && this.sjediste[item].zauzeto==true && this.sjediste[item].filmoviId == id )  {
-        
-        if(Array.isArray(this.niz)) {
+
 
           this.niz.push(this.sjediste[item].id);
-        }
+
       }
     }
     return this.niz

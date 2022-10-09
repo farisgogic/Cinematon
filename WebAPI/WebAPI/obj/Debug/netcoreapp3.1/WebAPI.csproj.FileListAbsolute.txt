@@ -443,7 +443,6 @@ C:\Users\User\OneDrive\Desktop\Cinematon\WebAPI\WebAPI\bin\Debug\netcoreapp3.1\S
 C:\Users\User\OneDrive\Desktop\Cinematon\WebAPI\WebAPI\bin\Debug\netcoreapp3.1\System.Web.Http.dll
 C:\Users\User\OneDrive\Desktop\Cinematon\WebAPI\WebAPI\bin\Debug\netcoreapp3.1\System.Web.Http.Cors.dll
 C:\Users\User\OneDrive\Desktop\Cinematon\WebAPI\WebAPI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
-C:\Users\User\OneDrive\Desktop\Cinematon\WebAPI\WebAPI\bin\Debug\netcoreapp3.1\WebAPI.Views.pdb
 C:\Users\User\OneDrive\Desktop\Cinematon\WebAPI\WebAPI\bin\Debug\netcoreapp3.1\MailKit.dll
 C:\Users\User\OneDrive\Desktop\Cinematon\WebAPI\WebAPI\bin\Debug\netcoreapp3.1\MimeKit.dll
 C:\Users\User\OneDrive\Desktop\Cinematon\WebAPI\WebAPI\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll

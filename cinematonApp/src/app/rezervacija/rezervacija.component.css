@@ -4,6 +4,17 @@ button{
     border-bottom-right-radius: 10px;
 }
 
+.studentskiPopust{
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    display: -webkit-inline-box;
+}
+
+input{
+    margin-right: 10px;
+}
+
 table{
     justify-content: center;
     display: grid;
@@ -132,6 +143,12 @@ h2{
         left: 40%;
         top: 30%;
     }
+
+    .studentskiPopust{
+        top: 47%;
+        left: 45%;
+        display: -webkit-inline-box;
+    }
 }
 
 @media screen and (max-width: 600px){
@@ -155,6 +172,10 @@ h2{
         left: 26%;
 
     }
+
+    .studentskiPopust{
+        left: 40%;
+    }
 }
 
 @media screen and (max-width: 412px){
@@ -171,7 +192,7 @@ h2{
     table{
         align-items: center;
         justify-content: center;
-        top: 35%;
+        top: 40%;
         left: 15%;
     }
 
@@ -179,7 +200,7 @@ h2{
         text-align: center;
         justify-content: center;
         position: absolute; 
-        top: 60%;
+        top: 70%;
         right: 35%; 
         font-size: 16px;
     }
@@ -187,9 +208,14 @@ h2{
     .zavrsi{
         position: absolute; 
         right: 35%; 
-        top: 80%;
+        top: 90%;
         text-align: center;
         justify-content: center;
+    }
+
+    .studentskiPopust{
+        top: 65%;
+        left: 35%;
     }
 
 }

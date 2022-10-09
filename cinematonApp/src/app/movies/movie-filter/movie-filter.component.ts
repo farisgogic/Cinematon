@@ -7,6 +7,7 @@ import {ZanrService} from "../../zanr/zanr.service";
 import {HttpResponse} from "@angular/common/http";
 import {Location} from "@angular/common"
 import {ActivatedRoute} from "@angular/router";
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-movie-filter',
@@ -30,17 +31,20 @@ export class MovieFilterComponent implements OnInit {
     this.form=this.formBuilder.group({
       naziv: '',
       zanrID: 0,
-      uskoro: false,
-      naProgramu: false
+      datum: ''
     });
     this.inicijalneVrijednost=this.form.value;
     this.readParamaterFromURL();
 
+    this.filter();
+  }
+  
+  filter(){
     this.zanrService.GetAllZanr().subscribe(zanr=>{
       this.zanrovi=zanr;
-
+  
       this.filterFilmova(this.form.value);
-
+  
       this.form.valueChanges.subscribe(value => {
         this.filterFilmova(value);
         this.writeParamaterURL();
@@ -51,6 +55,7 @@ export class MovieFilterComponent implements OnInit {
   filterFilmova(values:any){
     this.moviesService.filter(values).subscribe((response:HttpResponse<movieDTO[]>)=>{
       this.movies=response.body;
+
     })
   }
 
@@ -71,8 +76,8 @@ export class MovieFilterComponent implements OnInit {
       }
 
 
-      if(params['naProgramu']){
-        obj.naProgramu= params['naProgramu'];
+      if(params['datum']){
+        obj.datum= params['datum'];
       }
 
       this.form.patchValue(obj);
@@ -91,8 +96,8 @@ export class MovieFilterComponent implements OnInit {
     }
 
 
-    if(formValues.naProgramu){
-      queryStrings.push(`naProgramu=${formValues.naProgramu}`);
+    if(formValues.datum){
+      queryStrings.push(`datum=${formValues.datum }`);
     }
 
     this.location.replaceState('movies/filter',queryStrings.join('&'));

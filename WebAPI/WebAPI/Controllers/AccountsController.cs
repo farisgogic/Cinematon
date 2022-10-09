@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Amazon.Runtime.Internal.Auth;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +17,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using WebAPI.DTO;
 using WebAPI.Helpers;
 
@@ -31,9 +33,12 @@ namespace WebAPI.Controllers
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly IOptions<EmailOptionsDTO> emailOptions;
+        private readonly IEmail email;
 
         public AccountsController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-            IConfiguration configuration, ApplicationDbContext context, IMapper mapper, RoleManager<IdentityRole> roleManager)
+            IConfiguration configuration, ApplicationDbContext context, IMapper mapper, RoleManager<IdentityRole> roleManager,
+            IOptions<EmailOptionsDTO> emailOptions, IEmail email)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -41,6 +46,8 @@ namespace WebAPI.Controllers
             this.context = context;
             this.mapper = mapper;
             this.roleManager = roleManager;
+            this.emailOptions = emailOptions;
+            this.email = email;
         }
 
         [HttpGet("listKorisnik")]
@@ -96,15 +103,37 @@ namespace WebAPI.Controllers
 
             if (result.Succeeded)
             {
+                //SLANJE EMAILA
+
+                var token = await userManager.GenerateEmailConfirmationTokenAsync(korisnik);
+                var confirmEmailUrl = Request.Headers["confirmEmailUrl"];
+
+                var uriBuilder = new UriBuilder(confirmEmailUrl);
+                var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+                query["token"] = token;
+                query["userid"] = korisnik.Id;
+                uriBuilder.Query = query.ToString();
+                var urlString = uriBuilder.ToString();
+
+                var emailBody = $"Molimo Vas potvrdite vas email klikom na sljedeci link </br>{urlString}";
+                var naslov = "Potvrda Emaila";
+                await email.Send(podaci.Email, naslov, emailBody, emailOptions.Value);
+
+                ////////////
+
                 await userManager.AddClaimAsync(korisnik, new Claim("role", "user"));
-                return await NapraviTokenAsync(podaci);
+                await NapraviTokenAsync(podaci);
 
             }
 
             else
             {
-                return BadRequest("Lozinka mora sadrzavati minimalno 6 karaktera");
+                return BadRequest(result.Errors);
             }
+
+            return Ok(podaci);
+
+
         } 
 
 
@@ -112,6 +141,8 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<AuthenticationResponse>> Login([FromBody] KorisnickiPodaci podaci)
         {
             var result = await signInManager.PasswordSignInAsync(podaci.Email, podaci.Lozinka, isPersistent: false, lockoutOnFailure: false);
+
+
 
             if (result.Succeeded)
             {
@@ -123,6 +154,21 @@ namespace WebAPI.Controllers
                 return BadRequest("Pogresna prijava");
             }
         
+        }
+
+        [HttpPost("confirmemail")]
+        public async Task<IActionResult> ConfirmEmail(ConfirmEmailDTO model)
+        {
+            var korisnik = await userManager.FindByIdAsync(model.UserId);
+            var potvrda = await userManager.ConfirmEmailAsync(korisnik, Uri.UnescapeDataString(model.Token));
+
+            if (potvrda.Succeeded)
+            {
+                return Ok();
+            }
+
+            return Unauthorized();
+
         }
 
         private async Task<AuthenticationResponse> NapraviTokenAsync(KorisnickiPodaci podaci)
@@ -149,6 +195,50 @@ namespace WebAPI.Controllers
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
                 DatumIsteka = datumIsteka
             };
+        }
+
+        [HttpPost("resetpassword")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDTO model)
+        {
+            var korisnik = await userManager.FindByEmailAsync(model.Email);
+            if (korisnik != null || korisnik.EmailConfirmed)
+            {
+                //SLANJE EMAILA
+
+                var token = await userManager.GeneratePasswordResetTokenAsync(korisnik);
+                var changepasswordUrl = Request.Headers["changepasswordUrl"];
+
+                var uriBuilder = new UriBuilder(changepasswordUrl);
+                var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+                query["token"] = token;
+                query["userid"] = korisnik.Id;
+                uriBuilder.Query = query.ToString();
+                var urlString = uriBuilder.ToString();
+
+                var emailBody = $"Klikom na link pormijenite Vasu lozinku </br>{urlString}";
+                var naslov = "Promijena lozinke";
+                await email.Send(model.Email, naslov, emailBody, emailOptions.Value);
+
+                ////////////
+                
+                return Ok();
+            }
+
+            return Unauthorized();
+        }
+
+        [HttpPost("changepassword")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordDTO model)
+        {
+            var korisnik = await userManager.FindByIdAsync(model.UserId);
+            var resetPassword = await userManager.ResetPasswordAsync(korisnik, Uri.UnescapeDataString(model.Token), model.Password);
+
+            if (resetPassword.Succeeded)
+            {
+                return Ok();
+            }
+
+            return Unauthorized();
         }
     }
 }

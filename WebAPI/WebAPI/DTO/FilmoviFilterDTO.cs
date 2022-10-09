@@ -9,7 +9,6 @@ namespace WebAPI.DTO
     {
         public string naziv { get; set; }
         public int ZanrId { get; set; }
-        public bool uskoro { get; set; }
-        public bool naProgramu { get; set; }
+        public string datum { get; set; }
     }
 }

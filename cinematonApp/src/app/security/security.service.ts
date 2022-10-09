@@ -13,9 +13,28 @@ export class SecurityService {
   constructor(private http:HttpClient) { }
 
   private apiURL="https://webapi20220920183854.azurewebsites.net/api/accounts";
+  private confirmEmailUrl="https://ecinematon.web.app/potvrda-emaila";
+  private resetURL="https://webapi20220920183854.azurewebsites.net/api/accounts/resetpassword";
+  private changepasswordUrl="https://ecinematon.web.app/change-password";
   private readonly tokenKey:string='token';
   private readonly expirationTokenKey:string ='token-istice'
   private readonly roleField = 'role';
+
+  resetPassword(model: any) {
+    let headers = new HttpHeaders({
+      changepasswordUrl: this.changepasswordUrl
+    });
+    let options = { headers: headers };
+    return this.http.post(this.resetURL, model, options);
+  }
+
+  confirmEmail(model: any) {
+    return this.http.post(this.apiURL + "/confirmemail", model);
+  }
+
+  changePassword(model: any) {
+    return this.http.post("https://webapi20220920183854.azurewebsites.net/api/accounts/changepassword", model);
+  }
 
   getKorisnik(stranica: number, zapisiPoStranici:number): Observable<any>{
     let params=new HttpParams();
@@ -68,7 +87,11 @@ export class SecurityService {
   }
   
   registracija(podaci:KorisnickiPodaci):Observable<authenticationResponse>{
-    return this.http.post<authenticationResponse>(this.apiURL+ "/create", podaci);
+    let headers = new HttpHeaders({
+      'confirmEmailUrl':this.confirmEmailUrl
+    });
+    let options = { headers: headers };
+    return this.http.post<authenticationResponse>(this.apiURL+ "/create", podaci, options);
   }
 
   login(podaci:KorisnickiPodaci):Observable<authenticationResponse>{
@@ -83,4 +106,6 @@ export class SecurityService {
   getToken(){
     return localStorage.getItem(this.tokenKey);
   }
+
+  
 }

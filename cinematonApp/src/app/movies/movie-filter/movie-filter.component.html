@@ -1,16 +1,21 @@
 <h2>Pretrazi filmove</h2>
 
 <form [formGroup]="form">
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="fill">
     <mat-label style="font-size: 15px; font-weight: bolder;">Naziv</mat-label>
     <input formControlName="naziv" matInput />
   </mat-form-field>
 
-  <mat-form-field appearance="outline" >
+  <mat-form-field appearance="fill" >
     <mat-label style="font-size: 15px; font-weight: bolder;">Zanr</mat-label>
     <mat-select formControlName="zanrID">
       <mat-option *ngFor="let zanr of zanrovi" [value]="zanr.id">{{zanr.naziv}}</mat-option>
     </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" >
+    <mat-label style="font-size: 15px; font-weight: bolder;">Datum</mat-label>
+    <input type="date" formControlName="datum" matInput />
   </mat-form-field>
 
 

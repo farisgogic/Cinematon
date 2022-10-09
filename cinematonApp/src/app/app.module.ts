@@ -44,6 +44,10 @@ import { RezervacijaComponent } from './rezervacija/rezervacija.component';
 import { ListaRezervacijaComponent } from './rezervacija/lista-rezervacija/lista-rezervacija.component';
 import { SalaComponent } from './sala/sala/sala.component';
 import { DodajSaluComponent } from './sala/dodaj-salu/dodaj-salu.component';
+import { ResetPasswordComponent } from './security/reset-password/reset-password.component';
+import { AlertModule } from 'ngx-alerts';
+import { ChangePasswordComponent } from './security/change-password/change-password.component';
+import { PotvrdaEmailaComponent } from './security/potvrda-emaila/potvrda-emaila.component';
 
 @NgModule({
   declarations: [
@@ -74,10 +78,14 @@ import { DodajSaluComponent } from './sala/dodaj-salu/dodaj-salu.component';
     RezervacijaComponent,
     ListaRezervacijaComponent,
     SalaComponent,
-    DodajSaluComponent
+    DodajSaluComponent,
+    ResetPasswordComponent,
+    ChangePasswordComponent,
+    PotvrdaEmailaComponent
+    
   ],
-    imports: [
-        BrowserModule,
+  imports: [
+    BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         MaterialModule,
@@ -89,14 +97,14 @@ import { DodajSaluComponent } from './sala/dodaj-salu/dodaj-salu.component';
         HttpClientModule,
         MatNativeDateModule,
         MatTableModule,
-      SweetAlert2Module.forRoot(),
+        SweetAlert2Module.forRoot(),
         InputPriceFormatModule
-    ],
-  providers: [{
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptorService,
-      multi:true
-  }],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
+      ],
+      providers: [{
+        provide: HTTP_INTERCEPTORS,
+        useClass: JwtInterceptorService,
+        multi:true,
+      }],
+      bootstrap: [AppComponent]
+    })
+    export class AppModule { }

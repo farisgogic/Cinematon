@@ -62,6 +62,8 @@ namespace WebAPI
             });
 
             services.AddScoped<IFileStorageService, InAppStorageService>();
+            
+
             services.AddHttpContextAccessor();
 
 
@@ -95,6 +97,8 @@ namespace WebAPI
 
             services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
+            services.AddScoped<IEmail, MailJet>();
+            services.Configure<EmailOptionsDTO>(Configuration.GetSection("MailJet"));
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -102,6 +106,8 @@ namespace WebAPI
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireDigit = false;
                 options.Password.RequireUppercase = false;
+
+                options.User.RequireUniqueEmail = true;
             });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

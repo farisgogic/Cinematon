@@ -33,6 +33,8 @@ export class RezervacijaComponent implements OnInit{
   filter:any;
 
   cijena = 0;
+  filter_student: string = '';
+  check_student!: boolean;
 
   constructor(
     private rezervacijaService:RezervacijaService, 
@@ -52,6 +54,13 @@ export class RezervacijaComponent implements OnInit{
 
     this.getSjediste();
 
+  }
+  
+  filterPopust(){
+    if(this.check_student){
+      return this.movie.cijena - ((this.movie.cijena * 20)/100); 
+    }
+    return this.movie.cijena;
   }
 
   // loadData(){
@@ -95,7 +104,13 @@ export class RezervacijaComponent implements OnInit{
         sjediste.email=this.securityService.getFieldFromJWT('email');
         sjediste.filmoviId= this.movie.id;
         sjediste.salaId=this.movie.sala[0].id;
-        this.cijena+=this.movie.cijena;
+        if(this.check_student){
+          this.cijena += this.movie.cijena - ((this.movie.cijena * 20)/100); 
+        }
+
+        if(!this.check_student){
+          this.cijena += this.movie.cijena; 
+        }
   
       }
       
@@ -105,9 +120,20 @@ export class RezervacijaComponent implements OnInit{
           sjediste.email="";
           sjediste.filmoviId=0;
           sjediste.salaId=0;
+
+          
+          if(this.check_student){
+            this.cijena = this.cijena + (this.movie.cijena * 20)/100; 
+          }
+
           if(this.cijena>0){
             this.cijena-=this.movie.cijena;
           }
+
+          if(this.cijena<0 || this.cijena==0){
+            this.cijena=0;
+          }
+
         }
         
         else{
@@ -118,4 +144,5 @@ export class RezervacijaComponent implements OnInit{
       this.rezervisi(id, sjediste);
     });
   }
+
 }

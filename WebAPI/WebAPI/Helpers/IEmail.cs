@@ -8,6 +8,6 @@ namespace WebAPI.Helpers
 {
     public interface IEmail
     {
-        Task Send(string email, string body, EmailOptionsDTO options);
+        Task Send(string email, string naslov, string body, EmailOptionsDTO options);
     }
 }

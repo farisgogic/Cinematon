@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -184,20 +184,15 @@ namespace WebAPI.Controllers
                 filmoviQueryable = filmoviQueryable.Where(x => x.Naslov.Contains(filmoviFilterDTO.naziv));
             }
 
-            if (filmoviFilterDTO.uskoro)
-            {
-                var today = DateTime.Today;
-                filmoviQueryable = filmoviQueryable.Where(x => x.Datum>today);
-            }
-
-            if (filmoviFilterDTO.naProgramu)
-            {
-                filmoviQueryable = filmoviQueryable.Where(x => x.naProgramu);
-            }
-
             if (filmoviFilterDTO.ZanrId != 0)
             {
                 filmoviQueryable = filmoviQueryable.Where(x => x.FilmoviZanr.Select(y => y.ZanrId).Contains(filmoviFilterDTO.ZanrId));
+            }
+
+            if (!string.IsNullOrEmpty(filmoviFilterDTO.datum))
+            {
+                var d = DateTime.Parse(filmoviFilterDTO.datum);
+                filmoviQueryable = filmoviQueryable.Where(x => x.Datum == d);
             }
 
 

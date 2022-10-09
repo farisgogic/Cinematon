@@ -10,7 +10,12 @@
     </tr>
   </table>
   
+  <div class="studentskiPopust">
+    <input type="checkbox" [(ngModel)]="check_student"> 
+    <p><b>Studentska (-20%) </b></p>
+  </div>
 </div>
 
+
 <button class="zavrsi" (click)="zavrsi()" mat-flat-button color="warn">Zavrsi odabir</button>
-<h2 class="placanje" >Ukupno za platiti {{cijena}} KM</h2>
+<h2 class="placanje" >Ukupno za platiti {{cijena | number : '.2-2'}} KM</h2>

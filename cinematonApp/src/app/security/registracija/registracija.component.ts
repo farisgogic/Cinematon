@@ -3,6 +3,7 @@ import {KorisniciDTO, KorisnickiPodaci} from "../security.model";
 import {SecurityService} from "../security.service";
 import {parseWebAPIErrors} from "../../utilities/utils";
 import {Router} from "@angular/router";
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -24,8 +25,8 @@ export class RegistracijaComponent implements OnInit {
     this.errors=[];
     this.securityService.registracija(podaci).subscribe(response=>{
       this.securityService.snimiToken(response);
-      this.router.navigate(['/']);
     }, error=>this.errors=parseWebAPIErrors(error));
-
+    this.router.navigate(['/pocetna']);
+    Swal.fire("Potvrda", "Potvrdite Vas email putem linka koji smo vam poslali putem emaila", "success");
   }
 }
