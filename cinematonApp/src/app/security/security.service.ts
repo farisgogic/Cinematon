@@ -70,7 +70,7 @@ export class SecurityService {
     return true;
   }
 
-  getFieldFromJWT(field: string):string{
+  getFieldFromJWT(field: any):string{
     const token=localStorage.getItem(this.tokenKey);
     if(!token){return '';}
     const dataToken=JSON.parse(atob(token.split('.')[1]));
