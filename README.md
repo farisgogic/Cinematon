@@ -1,5 +1,3 @@
-<!-- LINK -->
-## https://ecinematon.web.app/
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
