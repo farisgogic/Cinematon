@@ -2,7 +2,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Cinematon is Web Application built using Angular, REST API
+Cinematon is Web Application built using Angular, C#
 
 <!-- INSTALLATION -->
 ## Installation
